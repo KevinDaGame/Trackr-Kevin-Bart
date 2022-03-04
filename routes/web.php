@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Package;
+use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/packages', function () {
     return view('packages', [
         'packages' => Package::with(['sender', 'recipient'])->get()
     ]);
+});
+
+Route::get('/customers', function () {
+    return view('customers', [
+        'customers' => Recipient::all()]);
 });
