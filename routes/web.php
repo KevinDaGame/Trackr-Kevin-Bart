@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Package;
-use App\Models\Customer;
+use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
 
 /*

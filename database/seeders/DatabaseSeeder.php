@@ -35,11 +35,11 @@ class DatabaseSeeder extends Seeder
             'postal_code' => '5544KL'
         ]);
         $address_2 = Address::create([
-            'country' => 'The Netherlands',
-            'city' => 'Amsterdam',
-            'street' => 'Koelaan',
-            'house_number' => '18A',
-            'postal_code' => '5544KL'
+            'country' => 'Brazil',
+            'city' => 'Rio de janearo',
+            'street' => 'Rue de rio',
+            'house_number' => 23,
+            'postal_code' => '55454KL'
         ]);
 
         $recipient_1 = Recipient::create([
