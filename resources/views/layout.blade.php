@@ -27,7 +27,7 @@
                     <a class="nav-link" href="/packages">Packages</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">clients</a>
+                    <a class="nav-link" href="/customers">Customers</a>
                 </li>
             </ul>
         </div>

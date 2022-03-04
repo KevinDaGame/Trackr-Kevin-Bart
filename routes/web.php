@@ -27,5 +27,5 @@ Route::get('/packages', function () {
 
 Route::get('/customers', function () {
     return view('customers', [
-        'customers' => Customer::all()]);
+        'customers' => Recipient::all()]);
 });

@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
-use App\Models\Customer;
-use App\Models\Address;
 use App\Models\Package;
 use App\Models\Recipient;
 use App\Models\Sender;
@@ -32,7 +30,8 @@ class DatabaseSeeder extends Seeder
             'country' => 'The Netherlands',
             'city' => 'Amsterdam',
             'street' => 'Koelaan',
-            'house_number' => '18A',
+            'house_number' => 18,
+            'addition' => 'A',
             'postal_code' => '5544KL'
         ]);
         $address_2 = Address::create([
@@ -63,11 +62,6 @@ class DatabaseSeeder extends Seeder
             'status' => 'In transit',
             'submitted_date'=> '2022-03-01 10:36:19',
             'sent_date' => '2022-03-02 11:28:22'
-        ]);
-
-        $this->call([
-            AddressSeeder::class,
-            CustomerSeeder::class
         ]);
     }
 }
