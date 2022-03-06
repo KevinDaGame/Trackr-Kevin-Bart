@@ -3,6 +3,16 @@
     <title>Customers</title>
 @endsection
 @section('body')
+    <form method="GET" action="#">
+        <label for="nameSearch">Zoek een zender of ontvanger:</label>
+        <input
+            id="nameSearch"
+            type="text"
+            name="search"
+            placeholder="zoek een zender of ontvanger"
+            value="{{ request('search') }}">
+    </form>
+
     <table class="table table-hover">
         <thead>
             <tr>
