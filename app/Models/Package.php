@@ -13,7 +13,6 @@ class Package extends Model
         return $this->belongsTo(Sender::class);
     }
 
-
     public function recipient(){
         return $this->belongsTo(Recipient::class);
     }

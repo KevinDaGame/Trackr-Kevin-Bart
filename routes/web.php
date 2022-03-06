@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PackageController;
 use App\Models\Package;
 use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
@@ -19,11 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/packages', function () {
-    return view('packages', [
-        'packages' => Package::with(['sender', 'recipient'])->get()
-    ]);
-});
+Route::get('/packages', [PackageController::class, 'index']);
 
 Route::get('/customers', function () {
     return view('customers', [
