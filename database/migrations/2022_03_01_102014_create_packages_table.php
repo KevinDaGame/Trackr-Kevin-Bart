@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->foreignId("sender_id");
-            $table->foreignId("recipient_id");
+            $table->foreignId("recipient_id")->nullable();
+            $table->foreignId('address_id');
             $table->text('notes')->nullable(true);
             $table->dateTime('submitted_date');
             $table->dateTime('sent_date')->nullable();
