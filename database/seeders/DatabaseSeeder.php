@@ -61,7 +61,6 @@ class DatabaseSeeder extends Seeder
             'recipient_id'=>$recipient_1->id,
             'address_id' => $address_1->id,
             'status' => 'In transit',
-            'submitted_date'=> '2022-03-01 10:36:19',
             'sent_date' => '2022-03-02 11:28:22'
         ]);
     }

@@ -28,70 +28,38 @@ class PackageController extends Controller
      */
     public function store(ReportPackageRequest $request)
     {
-//        $validated = $request->validate([
-//            'sender_id' => 'required|exists:senders,id',
-//            'notes' => 'max:255',
-//            'recipient.first_name' => 'required|max:255',
-//            'recipient.middle_name' => 'max:255',
-//            'recipient.last_name' => 'required|max:255',
-//            'recipient.address.country' => 'required|max:255',
-//            'recipient.address.city' => 'required|max:255',
-//            'recipient.address.street' => 'required|max:255',
-//            'recipient.address.house_number' => 'required',
-//            'recipient.address.addition' => 'max:1',
-//            'recipient.address.postal_code' => 'required|max:10',
-//        ]);
-//        if(count($validated) > 0){
-//            return $validated;
-//        }
-//        $address = Address::where('country', $country)
-//            ->where('city', $city)
-//            ->where('postal_code', $postal_code)
-//            ->where('street', $street)
-//            ->where('house_number', $house_number)
-//            ->where('addition', $addition);
-//        if($address == null){
-//            $address = new Address;
-//            $address->country = $country;
-//            $address->city = $city;
-//            $address->postal_code = $postal_code;
-//            $address->street = $street;
-//            $address->house_number = $house_number;
-//            $address->addition = $addition;
-//        }
-        $country = $request->get('recipient.address.country');
-        $city = $request->get('recipient.address.city');
-        $postal_code = $request->get('recipient.address.postal_code');
-        $street = $request->get('recipient.address.street');
-        $house_number = $request->get('recipient.address.house_number');
-        $addition = $request->get('recipient.address.addition');
+        $recipient = $request->get('recipient');
+        $address = $recipient['address'];
+        $addition = $address['addition'] ?? null;
+
         $address = Address::firstOrCreate(
             [
-                'country' => $country,
-                'city' => $city,
-                'postal_code' => $postal_code,
-                'street' => $street,
-                'house_number' => $house_number,
+                'country' => $address['country'],
+                'city' => $address['city'],
+                'postal_code' => $address['postal_code'],
+                'street' => $address['street'],
+                'house_number' => $address['house_number'],
                 'addition' => $addition,
             ],
             [
-                'country' => $country,
-                'city' => $city,
-                'postal_code' => $postal_code,
-                'street' => $street,
-                'house_number' => $house_number,
+                'country' => $address['country'],
+                'city' => $address['city'],
+                'postal_code' => $address['postal_code'],
+                'street' => $address['street'],
+                'house_number' => $address['house_number'],
                 'addition' => $addition,
             ]
         );
-        return $address;
         $newPackage = new Package([
             'sender_id' => $request->get('sender_id'),
+            'address_id' => $address->id,
             'recipient_id' => $request->get('recipient_id'),
-            'notes' => $request->get('notes')
+            'notes' => $request->get('notes'),
+            'status' => 'Reported'
         ]);
         $newPackage->save();
-        return json([
-            'success'   => false,
+        return json_encode([
+            'success'   => true,
             'message'   => 'Succesfully registered package',
             'data'      => $newPackage]
         );

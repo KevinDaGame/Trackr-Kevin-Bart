@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId("recipient_id")->nullable();
             $table->foreignId('address_id');
             $table->text('notes')->nullable(true);
-            $table->dateTime('submitted_date');
             $table->dateTime('sent_date')->nullable();
             $table->dateTime('delivered_date')->nullable();
             $table->string('status');
