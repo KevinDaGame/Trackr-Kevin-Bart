@@ -53,7 +53,6 @@ class PackageController extends Controller
         $newPackage = new Package([
             'sender_id' => $request->get('sender_id'),
             'address_id' => $address->id,
-            'recipient_id' => $request->get('recipient_id'),
             'notes' => $request->get('notes'),
             'status' => 'Reported'
         ]);
