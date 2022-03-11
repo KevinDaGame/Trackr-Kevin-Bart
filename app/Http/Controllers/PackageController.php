@@ -40,14 +40,6 @@ class PackageController extends Controller
                 'street' => $address['street'],
                 'house_number' => $address['house_number'],
                 'addition' => $addition,
-            ],
-            [
-                'country' => $address['country'],
-                'city' => $address['city'],
-                'postal_code' => $address['postal_code'],
-                'street' => $address['street'],
-                'house_number' => $address['house_number'],
-                'addition' => $addition,
             ]
         );
         $newPackage = new Package([
@@ -72,7 +64,7 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        return null;
     }
 
     /**
@@ -83,7 +75,7 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        return null;
     }
 
     /**
@@ -95,7 +87,7 @@ class PackageController extends Controller
      */
     public function update(Request $request, Package $package)
     {
-        //
+        return null;
     }
 
     /**
@@ -106,6 +98,6 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        return null;
     }
 }
