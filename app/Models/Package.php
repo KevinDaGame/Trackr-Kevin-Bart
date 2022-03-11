@@ -20,4 +20,18 @@ class Package extends Model
     public function status(){
         return $this->belongsTo(Status::class);
     }
+
+    public function scopeFilter($query) {
+        if (request('search')) {
+            $query
+                ->whereHas( 'sender', function ($q) {
+                    $q->where('name', 'like', '%' . request('search') . '%');
+                })
+                ->orWhereHas('recipient', function ($r) {
+                    $r->where('first_name' ,'like', '%' . request('search') . '%')
+                        ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+                        ->orWhere('last_name', 'like', '%' . request('search') . '%');
+                });
+        }
+    }
 }

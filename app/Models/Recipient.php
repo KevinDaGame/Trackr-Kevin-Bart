@@ -25,4 +25,13 @@ class Recipient extends Model
         }
         return $fullName . $this->last_name;
     }
+
+    public function scopeFilter($query) {
+        if (request('search')) {
+            $query
+                ->where('first_name' ,'like', '%' . request('search') . '%')
+                ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+                ->orWhere('last_name', 'like', '%' . request('search') . '%');
+        }
+    }
 }
