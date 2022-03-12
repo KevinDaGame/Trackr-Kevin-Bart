@@ -4,13 +4,32 @@
 @endsection
 @section('body')
     <form method="GET" action="#">
-        <label for="nameSearch">Zoek een zender of ontvanger:</label>
-        <input
-            id="nameSearch"
-            type="text"
-            name="search"
-            placeholder="zoek een zender of ontvanger"
-            value="{{ request('search') }}">
+        <div class="d-flex justify-content-center">
+            <div class="m-1">
+                <label for="nameSearch">Zoek een klant:</label>
+                <input
+                    id="nameSearch"
+                    type="text"
+                    name="name"
+                    placeholder="zoeken op naam"
+                    value="{{ request('name') }}"
+                    class="form-control">
+            </div>
+            <div class="m-1">
+                <label for="country">Selecteer het land:</label>
+                <select name="country" id="country" class="form-control">
+                    <option></option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country }}" {{ ( $country == request('country')) ? 'selected' : '' }}>
+                            {{ $country }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mt-auto m-1">
+                <button type="submit" class="btn btn-primary">Zoeken</button>
+            </div>
+        </div>
     </form>
 
     <table class="table table-hover">

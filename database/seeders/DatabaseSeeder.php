@@ -41,6 +41,13 @@ class DatabaseSeeder extends Seeder
             'house_number' => 23,
             'postal_code' => '55454KL'
         ]);
+        $address_3 = Address::create([
+            'country' => 'The Netherlands',
+            'city' => 'Uden',
+            'street' => 'Florijn',
+            'house_number' => 11,
+            'postal_code' => '5406BE'
+        ]);
 
         $recipient_1 = Recipient::create([
             'first_name'=>'Jan',
@@ -49,6 +56,14 @@ class DatabaseSeeder extends Seeder
             'email_address'=>'jan@pannetje.nl',
             'phone_number'=>'0638653289',
             'address_id' => $address_1->id
+        ]);
+        $recipient_2 = Recipient::create([
+            'first_name'=>'Bart',
+            'middle_name'=>'van',
+            'last_name'=>'Tiel',
+            'email_address'=>'bart@mail.nl',
+            'phone_number'=>'0638653289',
+            'address_id' => $address_3->id
         ]);
 
         $sender_1 = Sender::create([
@@ -60,6 +75,13 @@ class DatabaseSeeder extends Seeder
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_1->id,
             'status' => 'In transit',
+            'submitted_date'=> '2022-03-01 10:36:19',
+            'sent_date' => '2022-03-02 11:28:22'
+        ]);
+        $package_2 = Package::create([
+            'sender_id' => $sender_1->id,
+            'recipient_id'=>$recipient_2->id,
+            'status' => 'Reported',
             'submitted_date'=> '2022-03-01 10:36:19',
             'sent_date' => '2022-03-02 11:28:22'
         ]);

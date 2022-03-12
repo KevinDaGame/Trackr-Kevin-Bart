@@ -26,12 +26,19 @@ class Recipient extends Model
         return $fullName . $this->last_name;
     }
 
-    public function scopeFilter($query) {
-        if (request('search')) {
+    public function scopeFilter($query, array $filters) {
+        if ($filters['name'] ?? false) {
             $query
-                ->where('first_name' ,'like', '%' . request('search') . '%')
-                ->orWhere('middle_name', 'like', '%' . request('search') . '%')
-                ->orWhere('last_name', 'like', '%' . request('search') . '%');
+                ->where('first_name' ,'like', '%' . request('name') . '%')
+                ->orWhere('middle_name', 'like', '%' . request('name') . '%')
+                ->orWhere('last_name', 'like', '%' . request('name') . '%');
+        }
+
+        if ($filters['country'] ?? false) {
+            $query
+                ->whereHas('address', function ($q) {
+                    $q->where('country', request('country'));
+                });
         }
     }
 }
