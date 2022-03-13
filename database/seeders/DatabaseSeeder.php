@@ -81,8 +81,8 @@ class DatabaseSeeder extends Seeder
         $package_2 = Package::create([
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_2->id,
+            'address_id' => $address_1->id,
             'status' => 'Reported',
-            'submitted_date'=> '2022-03-01 10:36:19',
             'sent_date' => '2022-03-02 11:28:22'
         ]);
     }

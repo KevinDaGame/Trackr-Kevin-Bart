@@ -56,7 +56,7 @@
                 <tr class="table-primary">
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
-                    <td>{{$package->recipient->fullName()}}</td>
+                    <td>{{$package->recipient ?? false ? $package->recipient->fullName() : ''}}</td>
                     <td>{{$package->status}}</td>
                 </tr>
             @endforeach
