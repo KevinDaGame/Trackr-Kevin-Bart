@@ -1,5 +1,6 @@
 {
     "First name": "Voornaam",
     "Middle name": "Middelnaam",
-    "Last name": "Achter"
+    "Last name": "Achternaam",
+    "Email address": "Email adres"
 }
