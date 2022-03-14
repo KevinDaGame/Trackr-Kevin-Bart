@@ -1,6 +1,24 @@
 {
+    "Packages": "Pakketten",
+    "Customers": "Klanten",
+
+
+    "Register": "Registreren",
     "First name": "Voornaam",
     "Middle name": "Middelnaam",
     "Last name": "Achternaam",
-    "Email address": "Email adres"
+    "Email address": "Email adres",
+    "Password": "Wachtwoord",
+    "Phone number": "Telefoonnummer",
+    "Country": "Land",
+    "City": "Stad",
+    "Street": "Straat",
+    "Postal code": "Postcode",
+    "House number": "Huisnummer",
+    "Addition": "Toevoeging",
+    "Recipient": "Ontvanger",
+    "Webshop": "Webwinkel",
+    "Address": "Adres",
+    "I am a": "Ik ben een",
+    "Submit": "Versturen"
 }

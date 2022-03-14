@@ -24,10 +24,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/packages">Packages</a>
+                    <a class="nav-link" href="/packages">{{__('Packages')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/customers">Customers</a>
+                    <a class="nav-link" href="/customers">{{__('Customers')}}</a>
                 </li>
             </ul>
         </div>
