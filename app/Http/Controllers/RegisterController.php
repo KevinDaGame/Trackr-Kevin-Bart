@@ -15,7 +15,7 @@ class RegisterController extends Controller
             'first-name' => 'required|max:255|min:3',
             'middle-name' => 'max:255',
             'last-name' => 'required|max:255|min:3',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|max:255|min:8',
             'phone-number' => 'required|max:255',
             'country' => 'required|max:255',
@@ -28,7 +28,7 @@ class RegisterController extends Controller
 
         ]);
 
-        $address = Address::firstOrCreate([
+        $address = Address::create([
             'country' => request()->get('country'),
             'street' => request()->get('street'),
             'city' => request()->get('city'),
@@ -36,6 +36,16 @@ class RegisterController extends Controller
             'house_number' => request()->get('house_number'),
             'addition' => request()->get('addition'),
         ]);
+
+        User::create([
+            'first_name' => request()->get('first-name'),
+            'middle_name' => request()->get('middle-name'),
+            'last_name' => request()->get('last-name'),
+            'email' => request()->get('email'),
+            'phone_number' => request()->get('phone-number'),
+            'password' => bcrypt(request()->get('password')),
+        ]);
+            //TODO add recpient or webshop?
 
 
         return request()->all();
