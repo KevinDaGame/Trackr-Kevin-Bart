@@ -32,7 +32,6 @@
                         name="middle-name"
                         id="middle-name"
                         value="{{old('middle-name')}}"
-                        required
                     >
                     @error('middle-name')
                     <p class="text-red">{{$message}}</p>
@@ -187,7 +186,6 @@
                         name="addition"
                         id="addition"
                         value="{{old('addition')}}"
-                        required
                     >
                     @error('addition')
                     <p class="text-red">{{$message}}</p>

@@ -50,16 +50,16 @@ class PackageController extends Controller
         ]);
         $newPackage->save();
         return json_encode([
-            'success'   => true,
-            'message'   => 'Succesfully registered package',
-            'data'      => $newPackage]
-        );
+            'success' => true,
+            'message' => 'Succesfully registered package',
+            'data' => $newPackage
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Package  $package
+     * @param \App\Models\Package $package
      * @return \Illuminate\Http\Response
      */
     public function show(Package $package)
@@ -70,7 +70,7 @@ class PackageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Package  $package
+     * @param \App\Models\Package $package
      * @return \Illuminate\Http\Response
      */
     public function edit(Package $package)
@@ -81,8 +81,8 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Package  $package
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Package $package
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Package $package)
@@ -93,7 +93,7 @@ class PackageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Package  $package
+     * @param \App\Models\Package $package
      * @return \Illuminate\Http\Response
      */
     public function destroy(Package $package)
