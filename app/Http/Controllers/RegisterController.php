@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('register.create');
     }
 
-    public function store(){
-        request() -> validate([
+    public function store()
+    {
+        request()->validate([
             'first-name' => 'required|max:255|min:3',
-            'middle-name' => 'max:255',
             'last-name' => 'required|max:255|min:3',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|max:255|min:8',
@@ -24,7 +27,6 @@ class RegisterController extends Controller
             'postal_code' => 'required|max:255',
             'house_number' => 'required|numeric|max:255',
             'addition' => 'max:2',
-            'account-type' => 'required',
 
         ]);
 
@@ -37,17 +39,15 @@ class RegisterController extends Controller
             'addition' => request()->get('addition'),
         ]);
 
-        User::create([
-            'first_name' => request()->get('first-name'),
-            'middle_name' => request()->get('middle-name'),
-            'last_name' => request()->get('last-name'),
+        $user = User::create([
+            'name' => request()->get('first-name') . ' ' . request()->get('last-name'),
             'email' => request()->get('email'),
             'phone_number' => request()->get('phone-number'),
             'password' => bcrypt(request()->get('password')),
+            'address_id' => $address->id,
         ]);
-            //TODO add recpient or webshop?
+        auth()->login($user);
 
-
-        return request()->all();
+        return redirect('/')->with('success', 'Your account has been created');
     }
 }

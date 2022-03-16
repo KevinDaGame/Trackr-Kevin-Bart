@@ -24,20 +24,6 @@
                     @enderror
                 </div>
 
-                <div class="col-md-3 mb-6">
-                    <label class="form-label" for="middle-name">{{__('Middle name')}}</label>
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="middle-name"
-                        id="middle-name"
-                        value="{{old('middle-name')}}"
-                    >
-                    @error('middle-name')
-                    <p class="text-red">{{$message}}</p>
-                    @enderror
-                </div>
-
                 <div class="col-md mb-6">
                     <label class="form-label" for="last-name">{{__('Last name')}}</label>
                     <input
@@ -72,7 +58,7 @@
                 <label class="form-label" for="password">{{__('Password')}}</label>
                 <input
                     class="form-control"
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     value="{{old('password')}}"
@@ -193,22 +179,11 @@
                 </div>
             </div>
 
-            <fieldset class="form-group mb-6">
-                <legend class="mt-4">{{__('I am a')}}:</legend>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="recipient">
-                        <input type="radio" class="form-check-input" name="account-type" id="recipient" value="recipient">
-                        {{__('Recipient')}}
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="webshop">
-                        <input type="radio" class="form-check-input" name="account-type" id="webshop" value="webshop" checked="">
-                        {{__('Webshop')}}
-                    </label>
-                </div>
-            </fieldset>
             <input type="submit" class="btn btn-primary m-6" value="{{__('Submit')}}">
         </form>
     </main>
+
+    @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+    @endforeach
 @endsection()
