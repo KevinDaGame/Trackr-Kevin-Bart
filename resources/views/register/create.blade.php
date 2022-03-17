@@ -20,7 +20,7 @@
                         required
                     >
                     @error('first-name')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -35,7 +35,7 @@
                         required
                     >
                     @error('last-name')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     required
                 >
                 @error('email')
-                <p class="text-red">{{$message}}</p>
+                <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
             <div class="mb-6">
@@ -65,7 +65,7 @@
                     required
                 >
                 @error('password')
-                <p class="text-red">{{$message}}</p>
+                <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
 
@@ -80,7 +80,7 @@
                     required
                 >
                 @error('phone-number')
-                <p class="text-red">{{$message}}</p>
+                <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
             <legend class="mt-4">{{__('Address')}}</legend>
@@ -96,7 +96,7 @@
                         required
                     >
                     @error('country')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -111,7 +111,7 @@
                         required
                     >
                     @error('city')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -128,7 +128,7 @@
                         required
                     >
                     @error('street')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -143,7 +143,7 @@
                         required
                     >
                     @error('postal_code')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -160,7 +160,7 @@
                         required
                     >
                     @error('house_number')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -174,7 +174,7 @@
                         value="{{old('addition')}}"
                     >
                     @error('addition')
-                    <p class="text-red">{{$message}}</p>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -182,8 +182,4 @@
             <input type="submit" class="btn btn-primary m-6" value="{{__('Submit')}}">
         </form>
     </main>
-
-    @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-    @endforeach
 @endsection()
