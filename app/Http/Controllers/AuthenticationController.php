@@ -9,23 +9,29 @@ use Illuminate\Support\Facades\Hash;
 class AuthenticationController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         return view('login.index');
     }
-    public function login(Request $request){
-        request()->validate([
+
+    public function login(Request $request)
+    {
+        $attributes = request()->validate([
             'email' => 'required|email|exists:users,email',
             'password' => 'required',
         ]);
-        $user = User::whereEmail($request->email)->get()->first();
-        if(Hash::check($request->password ,$user->password)) {
-            auth()->login($user);
+        if (auth()->attempt($attributes)) {
+
             return redirect('/')->with('success', 'You are logged in!');
         } else {
-            dd('Failed!!!');
+            return back()->withErrors([
+                'email' => 'Your credentials could not be verified'
+            ])->withInput();
         }
     }
-    public function logout(){
+
+    public function logout()
+    {
         auth()->logout();
         return redirect('/')->with('success', 'You have successfully logged out!');
     }
