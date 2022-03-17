@@ -25,7 +25,7 @@ class RegisterController extends Controller
             'city' => 'required|max:255',
             'street' => 'required|max:255',
             'postal_code' => 'required|max:255',
-            'house_number' => 'required|numeric|max:255',
+            'house_number' => 'required|numeric',
             'addition' => 'max:2',
 
         ]);
@@ -48,6 +48,6 @@ class RegisterController extends Controller
         ]);
         auth()->login($user);
 
-        return redirect('/')->with('success', 'Your account has been created');
+        return redirect('/')->with('success', 'Your account has been created!');
     }
 }

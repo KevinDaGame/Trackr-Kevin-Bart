@@ -21,5 +21,7 @@
     "Address": "Adres",
     "I am a": "Ik ben een",
     "Submit": "Versturen",
-    "You are logged in!": "Je bent ingelogd!"
+    "You are logged in!": "Je bent ingelogd!",
+    "You have successfully logged out!": "Je bent succesvol uitgelogd!",
+    "Your account has been created!": "Uw account is gemaakt!"
 }

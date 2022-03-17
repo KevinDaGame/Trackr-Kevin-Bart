@@ -42,6 +42,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSenderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $address_id
+ * @property string $phone_number
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAddressId($value)
  */
 class User extends Authenticatable
 {
