@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class AuthenticationController extends Controller
 {
 
     public function index(){
@@ -24,5 +24,9 @@ class LoginController extends Controller
         } else {
             dd('Failed!!!');
         }
+    }
+    public function logout(){
+        auth()->logout();
+        return redirect('/')->with('success', 'You have successfully logged out!');
     }
 }
