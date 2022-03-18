@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\RegisterController;
+use App\Models\Package;
+use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +26,8 @@ Route::get('/', function () {
 Route::get('/packages', [PackageController::class, 'index']);
 
 Route::get('/customers', [CustomerController::class, 'index']);
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('login', [AuthenticationController::class, 'index'])->middleware('guest');
+Route::post('login', [AuthenticationController::class, 'login'])->middleware('guest');
+Route::get('logout', [AuthenticationController::class, 'logout'])->middleware('auth');
