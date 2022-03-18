@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->nullable();
-            $table->foreignId('recipient_id')->nullable();
-            $table->foreignId('address_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique();

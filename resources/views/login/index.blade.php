@@ -19,7 +19,7 @@
                     required
                 >
                 @error('email')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-danger">{{__($message)}}</p>
                 @enderror
             </div>
             <div class="col-md mb-3">
@@ -32,7 +32,7 @@
                     required
                 >
                 @error('password')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-danger">{{__($message)}}</p>
                 @enderror
             </div>
 
