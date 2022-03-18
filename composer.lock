@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dacbc965b031b987fc16d88bc26856f6",
+    "content-hash": "25cc4a959df561b0b3e1b3a6e91a582f",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1182,6 +1182,68 @@
                 }
             ],
             "time": "2022-02-13T22:57:42+00:00"
+        },
+        {
+            "name": "jorgenwdm/laravel-barcode",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jorgenwdm/laravel-barcode.git",
+                "reference": "1c6d62c0d731ac55bad98b21e0cf70bcc0a1ea11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jorgenwdm/laravel-barcode/zipball/1c6d62c0d731ac55bad98b21e0cf70bcc0a1ea11",
+                "reference": "1c6d62c0d731ac55bad98b21e0cf70bcc0a1ea11",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "service",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jorgenwdm\\Barcode\\BarcodeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Generators/Helpers.php"
+                ],
+                "psr-4": {
+                    "Jorgenwdm\\Barcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jorgenwdm",
+                    "email": "grtrustme@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel barcode generator based on TCPDF barcode library",
+            "keywords": [
+                "TCPDF",
+                "barcode",
+                "jorgenwdm",
+                "laravel",
+                "laravel-package",
+                "php",
+                "qr-code",
+                "qrcode"
+            ],
+            "support": {
+                "issues": "https://github.com/jorgenwdm/laravel-barcode/issues",
+                "source": "https://github.com/jorgenwdm/laravel-barcode/tree/main"
+            },
+            "time": "2021-11-24T00:09:20+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8156,7 +8218,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "jorgenwdm/laravel-barcode": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

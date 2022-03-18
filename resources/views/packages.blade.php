@@ -58,7 +58,12 @@
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->fullName() : ''}}</td>
                     <td>{{$package->status}}</td>
-                    <td><form method="GET" action="/generate-pdf"><button type="submit" class="btn btn-primary btn-sm" value="{{ $package->id }}">Download als pdf</button></form></td>
+                    <td>
+                        <form method="GET" action="generate-pdf">
+                            <input type="hidden" name="id" value="{{ $package->id }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Download als pdf</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
 

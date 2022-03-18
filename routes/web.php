@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +23,4 @@ Route::get('/packages', [PackageController::class, 'index']);
 
 Route::get('/customers', [CustomerController::class, 'index']);
 
-Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
+Route::get('/generate-pdf', [PackageController::class, 'generatePdf']);
