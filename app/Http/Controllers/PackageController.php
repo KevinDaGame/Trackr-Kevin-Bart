@@ -34,4 +34,8 @@ class PackageController extends Controller
 
         return $pdf->stream('test.pdf');
     }
+
+    public function generatePdfs(Request $request) {
+        dd($request);
+    }
 }

@@ -24,3 +24,5 @@ Route::get('/packages', [PackageController::class, 'index']);
 Route::get('/customers', [CustomerController::class, 'index']);
 
 Route::get('/generate-pdf', [PackageController::class, 'generatePdf']);
+
+Route::get('/generate-pdfs', [PackageController::class, 'generatePdfs']);

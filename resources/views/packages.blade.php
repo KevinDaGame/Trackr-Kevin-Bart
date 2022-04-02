@@ -45,28 +45,29 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th></th>
             <th scope="col">Id</th>
             <th scope="col">Sender</th>
             <th scope="col">Recipient</th>
             <th scope="col">Status</th>
         </tr>
         </thead>
-        <tbody>
+        <form method="GET" action="generate-pdfs" id="selected-packages">
+            <tbody>
             @foreach($packages as $package)
                 <tr class="table-primary">
+                    <td><input type="checkbox" name="download{{$package->id}}" value="{{$package->id}}"></td>
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->fullName() : ''}}</td>
                     <td>{{$package->status}}</td>
                     <td>
-                        <form method="GET" action="generate-pdf">
-                            <input type="hidden" name="id" value="{{ $package->id }}">
-                            <button type="submit" class="btn btn-primary btn-sm">Download als pdf</button>
-                        </form>
+                        <a href="/generate-pdf?id={{$package->id}}">Download als pdf</a>
                     </td>
                 </tr>
             @endforeach
-
-        </tbody>
+            </tbody>
+        </form>
     </table>
+    <button type="submit" class="btn btn-primary btn-sm" form="selected-packages">Download geselecteerde orders als pdf</button>
 @endsection
