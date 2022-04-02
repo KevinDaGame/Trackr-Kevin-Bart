@@ -10,10 +10,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Jorgenwdm\Barcode\Generators\Barcode1d;
+use Illuminate\Support\Facades\Auth;
 
 class PackageController extends Controller
 {
     public function index() {
+        if(Auth::user()->level() < 3){
+            abort(401);
+        }
         return view('packages', [
             'packages' => Package::with(['sender', 'recipient'])->filter(request(['sender', 'receiver', 'status']))->get(),
             'statuses' => Status::pluck('status')
