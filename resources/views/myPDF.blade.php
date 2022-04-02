@@ -42,7 +42,9 @@
 </div>
 
 <div class="border p-3 mt-3">
-    <h1>Barcode</h1>
+    <h3>Track & Trace code:</h3>
+    <p>{{$package->id}}</p>
+    <h3>Barcode:</h3>
     {!! $barcode !!}
 </div>
 
