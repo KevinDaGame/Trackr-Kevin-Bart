@@ -68,21 +68,6 @@
                 <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
-
-            <div class="mb-6">
-                <label class="form-label" for="phone-number">{{__('Phone number')}}</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    name="phone-number"
-                    id="phone-number"
-                    value="{{old('phone-number')}}"
-                    required
-                >
-                @error('phone-number')
-                <p class="text-danger">{{$message}}</p>
-                @enderror
-            </div>
             <legend class="mt-4">{{__('Address')}}</legend>
             <div class="row mt-3">
                 <div class="col-md mb-6">

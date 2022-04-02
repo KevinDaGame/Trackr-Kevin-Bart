@@ -20,7 +20,6 @@ class RegisterController extends Controller
             'last-name' => 'required|max:255|min:3',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|max:255|min:8',
-            'phone-number' => 'required|max:255',
             'country' => 'required|max:255',
             'city' => 'required|max:255',
             'street' => 'required|max:255',
@@ -42,10 +41,10 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => request()->get('first-name') . ' ' . request()->get('last-name'),
             'email' => request()->get('email'),
-            'phone_number' => request()->get('phone-number'),
             'password' => bcrypt(request()->get('password')),
             'address_id' => $address->id,
         ]);
+        $user->attachRole(config('roles.models.role')::where('name', '=', 'Customer')->first());
         auth()->login($user);
 
         return redirect('/')->with('success', 'Your account has been created!');
