@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        
         Status::create(['status' => 'Reported']);
         Status::create(['status' => 'Printed']);
         Status::create(['status' => 'Delivered to sorting center']);
