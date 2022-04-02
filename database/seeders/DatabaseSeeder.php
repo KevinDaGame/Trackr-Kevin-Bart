@@ -8,6 +8,7 @@ use App\Models\Recipient;
 use App\Models\Sender;
 use App\Models\Status;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        Model::unguard();
+
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(ConnectRelationshipsSeeder::class);
+
+        Model::reguard();
         Status::create(['status' => 'Reported']);
         Status::create(['status' => 'Printed']);
         Status::create(['status' => 'Delivered to sorting center']);
