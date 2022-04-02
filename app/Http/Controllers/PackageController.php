@@ -25,6 +25,9 @@ class PackageController extends Controller
     }
 
     public function generatePdf() {
+        if(Auth::user()->level() < 3){
+            abort(401);
+        }
         $package = Package::With('sender', 'recipient')->find(request('id'));
         $barcode = Barcode1d::create("C128", Str::limit($package->id, 16, ""))->toHtml();
 
@@ -41,6 +44,9 @@ class PackageController extends Controller
     }
 
     public function generatePdfs(Request $request) {
+        if(Auth::user()->level() < 3){
+            abort(401);
+        }
         $packageIds = $request->query();
         $data = [
             'title' => 'Dit is een label',
