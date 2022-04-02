@@ -11,10 +11,11 @@ return new class extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('packages', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId("sender_id");
             $table->foreignId("recipient_id")->nullable();
             $table->foreignId('address_id');
