@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/roletest', function () {
+    return view('roletest');
+});
 Route::get('/packages', [PackageController::class, 'index']);
 
 Route::get('/customers', [CustomerController::class, 'index']);

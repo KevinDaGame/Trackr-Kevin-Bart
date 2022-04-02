@@ -13,7 +13,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $userRole = config('roles.models.role')::where('name', '=', 'User')->first();
+        $customerRole = config('roles.models.role')::where('name', '=', 'Customer')->first();
+        $webshopRole = config('roles.models.role')::where('name', '=', 'Web shop')->first();
+        $packerRole = config('roles.models.role')::where('name', '=', 'Packer')->first();
+        $superAdminRole = config('roles.models.role')::where('name', '=', 'Super admin')->first();
         $adminRole = config('roles.models.role')::where('name', '=', 'Admin')->first();
         $permissions = config('roles.models.permission')::all();
 
@@ -21,10 +24,22 @@ class UsersTableSeeder extends Seeder
          * Add Users
          *
          */
-        if (config('roles.models.defaultUser')::where('email', '=', 'admin@admin.com')->first() === null) {
+        if (config('roles.models.defaultUser')::where('email', '=', 'superadmin@trackr.com')->first() === null) {
+            $newUser = config('roles.models.defaultUser')::create([
+                'name'     => 'Super admin',
+                'email'    => 'superadmin@trackr.com',
+                'password' => bcrypt('password'),
+            ]);
+
+            $newUser->attachRole($superAdminRole);
+            foreach ($permissions as $permission) {
+                $newUser->attachPermission($permission);
+            }
+        }
+        if (config('roles.models.defaultUser')::where('email', '=', 'admin@trackr.com')->first() === null) {
             $newUser = config('roles.models.defaultUser')::create([
                 'name'     => 'Admin',
-                'email'    => 'admin@admin.com',
+                'email'    => 'admin@trackr.com',
                 'password' => bcrypt('password'),
             ]);
 
@@ -33,15 +48,38 @@ class UsersTableSeeder extends Seeder
                 $newUser->attachPermission($permission);
             }
         }
-
-        if (config('roles.models.defaultUser')::where('email', '=', 'user@user.com')->first() === null) {
+        if (config('roles.models.defaultUser')::where('email', '=', 'packer@trackr.com')->first() === null) {
             $newUser = config('roles.models.defaultUser')::create([
-                'name'     => 'User',
-                'email'    => 'user@user.com',
+                'name'     => 'Packer',
+                'email'    => 'packer@trackr.com',
                 'password' => bcrypt('password'),
             ]);
 
-            $newUser->attachRole($userRole);
+            $newUser->attachRole($packerRole);
+            foreach ($permissions as $permission) {
+                $newUser->attachPermission($permission);
+            }
+        }
+        if (config('roles.models.defaultUser')::where('email', '=', 'webshop@trackr.com')->first() === null) {
+            $newUser = config('roles.models.defaultUser')::create([
+                'name'     => 'Webshop',
+                'email'    => 'webshop@trackr.com',
+                'password' => bcrypt('password'),
+            ]);
+
+            $newUser->attachRole($webshopRole);
+            foreach ($permissions as $permission) {
+                $newUser->attachPermission($permission);
+            }
+        }
+        if (config('roles.models.defaultUser')::where('email', '=', 'customer@trackr.com')->first() === null) {
+            $newUser = config('roles.models.defaultUser')::create([
+                'name'     => 'Customer',
+                'email'    => 'customer@trackr.com',
+                'password' => bcrypt('password'),
+            ]);
+
+            $newUser->attachRole($customerRole);
         }
     }
 }
