@@ -56,7 +56,7 @@
             <tbody>
             @foreach($packages as $package)
                 <tr class="table-primary">
-                    <td><input type="checkbox" name="download{{$package->id}}" value="{{$package->id}}"></td>
+                    <td><input type="checkbox" name="dl{{$package->id}}" value="{{$package->id}}"></td>
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->fullName() : ''}}</td>

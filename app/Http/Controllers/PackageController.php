@@ -32,10 +32,24 @@ class PackageController extends Controller
 
         $pdf = Pdf::loadView('myPDF', $data);
 
-        return $pdf->stream('test.pdf');
+        return $pdf->stream('label.pdf');
     }
 
     public function generatePdfs(Request $request) {
-        dd($request);
+        $packageIds = $request->query();
+        $data = [
+            'title' => 'Dit is een label',
+            'date' => date('d/m/y'),
+            'packages' => [],
+            'barcodes' => []
+        ];
+
+        foreach ($packageIds as $id) {
+            $data['packages'][$id] = Package::with('sender', 'recipient')->find($id);
+            $data['barcodes'][$id] = Barcode1d::create("C128", $id)->toHtml();
+        }
+
+        $pdf = Pdf::loadView('myBigPDF', $data);
+        return $pdf->stream('labels.pdf');
     }
 }
