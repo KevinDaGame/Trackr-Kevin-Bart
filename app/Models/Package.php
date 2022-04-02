@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Traits\Uuid;
 /**
  * App\Models\Package
  *
@@ -39,6 +39,10 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+    use Uuid;
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected $guarded = [];
     protected $fillable = ['sender_id', 'address_id', 'recipient_id', 'notes', 'status'];
     public function sender(){
         return $this->belongsTo(Sender::class);
