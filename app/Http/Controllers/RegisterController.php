@@ -45,7 +45,6 @@ class RegisterController extends Controller
             'address_id' => $address->id,
         ]);
         $user->attachRole(config('roles.models.role')::where('name', '=', 'Customer')->first());
-        $user->attachRole(config('roles.models.role')::where('name', '=', 'Web shop')->first());
         auth()->login($user);
 
         return redirect('/')->with('success', 'Your account has been created!');
