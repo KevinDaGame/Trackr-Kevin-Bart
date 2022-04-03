@@ -28,5 +28,6 @@
     "Your credentials could not be verified": "Jouw inloggegevens kunnen niet geverifieerd worden",
     "Add new package": "Nieuw pakket aanmelden",
     "Sender": "Verzender",
-    "Name": "Naam"
+    "Name": "Naam",
+    "Notes": "Notities"
 }

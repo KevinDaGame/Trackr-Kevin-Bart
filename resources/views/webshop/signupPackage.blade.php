@@ -30,17 +30,17 @@
             </div>
 
             <div class="col-md mb-6">
-{{--                <label class="form-label" for="recipient-first-name">{{__('First name')}}</label>--}}
-{{--                <input--}}
-{{--                    class="form-control"--}}
-{{--                    type="text"--}}
-{{--                    name="recipient-first-name"--}}
-{{--                    id="recipient-first-name"--}}
-{{--                    value="{{old('recipient-first-name')}}"--}}
-{{--                    required>--}}
-{{--                @error('recipient-first-name')--}}
-{{--                <p class="text-danger">{{$message}}</p>--}}
-{{--                @enderror--}}
+                <label class="form-label" for="recipient-name">{{__('Name')}}</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="recipient-name"
+                    id="recipient-name"
+                    value="{{old('recipient-name')}}"
+                    required>
+                @error('recipient-name')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
         </div>
 
@@ -97,18 +97,18 @@
             </div>
 
             <div class="col-md mb-6">
-                {{--                <label class="form-label" for="recipient-last-name">{{__('Last name')}}</label>--}}
-                {{--                <input--}}
-                {{--                    class="form-control"--}}
-                {{--                    type="text"--}}
-                {{--                    name="recipient-last-name"--}}
-                {{--                    id="recipient-last-name"--}}
-                {{--                    value="{{old('recipient-last-name')}}"--}}
-                {{--                    required--}}
-                {{--                >--}}
-                {{--                @error('recipient-last-name')--}}
-                {{--                <p class="text-danger">{{$message}}</p>--}}
-                {{--                @enderror--}}
+                <label class="form-label" for="recipient-phone_number">{{__('Phone number')}}</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="recipient-phone_number"
+                    id="recipient-phone_number"
+                    value="{{old('recipient-phone_number')}}"
+                    required
+                >
+                @error('recipient-phone_number')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
         </div>
 
@@ -116,7 +116,8 @@
             <div class="col">
                 <div class="row">
                     <div class="col-md mb-6">
-                        <label class="form-label" class="form-label" for="sender-postal_code">{{__('Postal code')}}</label>
+                        <label class="form-label" class="form-label"
+                               for="sender-postal_code">{{__('Postal code')}}</label>
                         <input
                             class="form-control"
                             type="text"
@@ -163,8 +164,144 @@
             </div>
 
             <div class="col-md mb-6">
-
+                <label class="form-label" for="recipient-email">{{__('Email address')}}</label>
+                <input
+                    class="form-control"
+                    type="email"
+                    name="recipient-email"
+                    id="recipient-email"
+                    value="{{old('recipient-email')}}"
+                    required
+                >
+                @error('recipient-email')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md mb-6"></div>
+
+            <div class="col">
+                <div class="row">
+                    <div class="col-md mb-6">
+                        <label class="form-label" for="recipient-street">{{__('Street')}}</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="recipient-street"
+                            id="recipient-street"
+                            value="{{old('recipient-street')}}"
+                            required
+                        >
+                        @error('recipient-street')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-md mb-6">
+                                <label class="form-label" for="recipient-house_number">{{__('House number')}}</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="recipient-house_number"
+                                    id="recipient-house_number"
+                                    value="{{old('recipient-house_number')}}"
+                                    required
+                                >
+                                @error('recipient-house_number')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col-md mb-6">
+                                <label class="form-label" for="recipient-addition">{{__('Addition')}}</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="recipient-addition"
+                                    id="recipient-addition"
+                                    value="{{old('recipient-addition')}}"
+                                >
+                                @error('recipient-addition')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md mb-6"></div>
+
+            <div class="col-md mb-6">
+                <div class="row">
+                    <div class="col-md mb-6">
+                        <label class="form-label" class="form-label"
+                               for="recipient-postal_code">{{__('Postal code')}}</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="recipient-postal_code"
+                            id="recipient-postal_code"
+                            value="{{old('recipient-postal_code')}}"
+                            required
+                        >
+                        @error('recipient-postal_code')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+
+                    <div class="col-md mb-6">
+                        <label class="form-label" for="recipient-city">{{__('City')}}</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="recipient-city"
+                            id="recipient-city"
+                            value="{{old('recipient-city')}}"
+                            required
+                        >
+                        @error('recipient-city')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+
+                    <div class="col-md mb-6">
+                        <label class="form-label" for="recipient-country">{{__('Country')}}</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="recipient-country"
+                            id="recipient-country"
+                            value="{{old('recipient-country')}}"
+                            required
+                        >
+                        @error('recipient-country')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <label class="form-label" for="notes">{{__('Notes')}}</label>
+                <textarea
+                    class="form-control"
+                    type="text"
+                    name="notes"
+                    id="notes"
+                    cols="4"
+                >{{old('notes')}}</textarea>
+                @error('notes')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+            <div class="col-md"></div>
         </div>
 
         <input type="submit" class="btn btn-primary mt-3" value="{{__('Submit')}}">

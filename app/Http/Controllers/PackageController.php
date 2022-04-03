@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Recipient;
 use App\Models\Sender;
 use App\Models\Status;
 use App\Http\Requests\ReportPackageRequest;
@@ -39,7 +40,17 @@ class PackageController extends Controller
             'sender-addition' => 'max:2',
             'sender-postal_code' => 'required|max:255',
             'sender-city' => 'required|max:255',
-            'sender-country' => 'required|max:255'
+            'sender-country' => 'required|max:255',
+            'recipient-name' => 'required|max:255|min:3',
+            'recipient-street' => 'required|max:255',
+            'recipient-house_number' => 'required|numeric',
+            'recipient-addition' => 'max:2',
+            'recipient-postal_code' => 'required|max:255',
+            'recipient-city' => 'required|max:255',
+            'recipient-country' => 'required|max:255',
+            'recipient-phone_number' => 'required|max:255',
+            'recipient-email'=> 'required|email|max:255',
+            'notes' => 'max:65535'
         ]);
 
         $senderAddress = Address::firstOrCreate([
@@ -56,9 +67,27 @@ class PackageController extends Controller
            'address_id' => $senderAddress->id
         ]);
 
+        $recipientAddress = Address::firstOrCreate([
+            'country' => request()->get('recipient-country'),
+            'street' => request()->get('recipient-street'),
+            'city' => request()->get('recipient-city'),
+            'postal_code' => request()->get('recipient-postal_code'),
+            'house_number' => request()->get('recipient-house_number'),
+            'addition' => request()->get('recipient-addition'),
+        ]);
+
+        $recipient = Recipient::firstOrCreate([
+            'name' => request()->get('recipient-name'),
+            'email_address' => request()->get('recipient-email'),
+            'phone_number' => request()->get('recipient-phone_number'),
+            'address_id' => $recipientAddress->id
+        ]);
+
         $package = Package::create([
             'sender_id' => $sender->id,
-
+            'recipient_id' => $recipient->id,
+            'notes' => request()->get('notes'),
+            'status' => 'Reported'
         ]);
 
         return redirect('/')->with('success', 'Your package has been registered');

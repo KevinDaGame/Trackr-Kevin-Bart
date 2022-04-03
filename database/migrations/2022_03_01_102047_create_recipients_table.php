@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('email_address');
             $table->string('phone_number');
             $table->foreignId('address_id');
