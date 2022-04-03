@@ -71,9 +71,7 @@ class Package extends Model
         if ($filters['receiver'] ?? false) {
             $query
                 ->WhereHas('recipient', function ($q) {
-                    $q->where('first_name' ,'like', '%' . request('receiver') . '%')
-                        ->orWhere('middle_name', 'like', '%' . request('receiver') . '%')
-                        ->orWhere('last_name', 'like', '%' . request('receiver') . '%');
+                    $q->where('name' ,'like', '%' . request('receiver') . '%');
                 });
         }
 

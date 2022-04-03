@@ -59,7 +59,7 @@
                     <td><input type="checkbox" name="dl{{$package->id}}" value="{{$package->id}}"></td>
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
-                    <td>{{$package->recipient ?? false ? $package->recipient->fullName() : ''}}</td>
+                    <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
                     <td>{{$package->status}}</td>
                     <td>
                         <a href="/generate-pdf?id={{$package->id}}">Download als pdf</a>
