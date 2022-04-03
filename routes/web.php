@@ -33,3 +33,7 @@ Route::post('register', [RegisterController::class, 'store'])->middleware('guest
 Route::get('login', [AuthenticationController::class, 'index'])->middleware('guest');
 Route::post('login', [AuthenticationController::class, 'login'])->middleware('guest');
 Route::get('logout', [AuthenticationController::class, 'logout'])->middleware('auth');
+
+Route::get('/generate-pdf', [PackageController::class, 'generatePdf'])->middleware(['level:3']);
+
+Route::get('/generate-pdfs', [PackageController::class, 'generatePdfs'])->middleware(['level:3']);
