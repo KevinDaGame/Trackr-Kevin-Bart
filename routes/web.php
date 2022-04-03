@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TokensController;
 use App\Models\Package;
 use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,6 @@ Route::get('/roletest', function () {
     return view('roletest');
 });
 Route::get('/packages', [PackageController::class, 'index']);
-
 Route::get('/customers', [CustomerController::class, 'index']);
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
@@ -37,3 +37,6 @@ Route::get('logout', [AuthenticationController::class, 'logout'])->middleware('a
 Route::get('/generate-pdf', [PackageController::class, 'generatePdf'])->middleware(['level:3']);
 
 Route::get('/generate-pdfs', [PackageController::class, 'generatePdfs'])->middleware(['level:3']);
+Route::get('/webshop/tokens', [TokensController::class, 'index']);
+Route::post('deleteToken', [TokensController::class, 'delete']);
+Route::post('createToken', [TokensController::class, 'create']);

@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Recipient wherePhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Recipient filter(array $filters)
  */
 class Recipient extends Model
 {

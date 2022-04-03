@@ -8,6 +8,7 @@ use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Jorgenwdm\Barcode\Generators\Barcode1d;
 use Illuminate\Support\Facades\Auth;

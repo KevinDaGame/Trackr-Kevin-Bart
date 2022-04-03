@@ -6,13 +6,14 @@ use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class PackageApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class PackageApiController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return false|string
      */
     public function store(ReportPackageRequest $request)
     {

@@ -5,9 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     @yield('title')
     @php
         $user = Auth::user()
@@ -35,6 +37,12 @@
                             <a class="nav-link" href="/customers">{{__('Customers')}}</a>
                         </li>
                     @endif
+                    @if($user != null && $user->hasRole('webshop'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="/webshop/tokens">{{__('Tokens')}}</a>
+                        </li>
+                    @endif
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @guest

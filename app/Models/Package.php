@@ -35,6 +35,7 @@ use App\Traits\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Package filter(array $filters)
  */
 class Package extends Model
 {
