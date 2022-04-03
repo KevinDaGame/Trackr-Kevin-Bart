@@ -32,7 +32,6 @@ class PackageController extends Controller
     }
 
     public function store() {
-
         request()->validate([
             'sender-name' => 'required|max:255|min:3',
             'sender-street' => 'required|max:255',
@@ -91,6 +90,14 @@ class PackageController extends Controller
         ]);
 
         return redirect('/')->with('success', 'Your package has been registered');
+    }
+
+    public function storeCsv() {
+        $path = request()->file('csv_file')->getRealPath();
+        $data = array_map('str_getcsv', file($path));
+        dd($data);
+        //TODO: parse data
+        //TODO: offer csv file template
     }
 
     public function generatePdf() {

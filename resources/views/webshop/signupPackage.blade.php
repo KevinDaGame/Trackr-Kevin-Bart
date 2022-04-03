@@ -306,4 +306,22 @@
 
         <input type="submit" class="btn btn-primary mt-3" value="{{__('Submit')}}">
     </form>
+
+    <form class="mt-1 p-3" method="POST" action="/importcsv" enctype="multipart/form-data">
+        @csrf
+        <label class="form-label" for="csv_file">CSV:</label>
+        <input
+            type="file"
+            id="csv_file"
+            class="form-control"
+            name="csv_file"
+            accept=".csv"
+            required
+        >
+        @error('csv_file')
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+
+        <input type="submit" class="btn btn-primary mt-3" value="{{__('Submit')}}">
+    </form>
 @endsection
