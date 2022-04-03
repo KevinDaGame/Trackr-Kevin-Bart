@@ -46,6 +46,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int|null $address_id
  * @property string $phone_number
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAddressId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\jeremykenedy\LaravelRoles\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\jeremykenedy\LaravelRoles\Models\Permission[] $userPermissions
+ * @property-read int|null $user_permissions_count
  */
 class User extends Authenticatable
 {
