@@ -48,7 +48,7 @@ class PackageController extends Controller
             'recipient-postal_code' => 'required|max:255',
             'recipient-city' => 'required|max:255',
             'recipient-country' => 'required|max:255',
-            'recipient-phone_number' => 'required|max:255',
+            'recipient-phone_number' => 'required|max:16',
             'recipient-email'=> 'required|email|max:255',
             'notes' => 'max:65535'
         ]);
@@ -59,7 +59,7 @@ class PackageController extends Controller
             'city' => request()->get('sender-city'),
             'postal_code' => request()->get('sender-postal_code'),
             'house_number' => request()->get('sender-house_number'),
-            'addition' => request()->get('sender-addition'),
+            'addition' => request()->get('sender-addition')
         ]);
 
         $sender = Sender::firstOrCreate([
@@ -73,7 +73,7 @@ class PackageController extends Controller
             'city' => request()->get('recipient-city'),
             'postal_code' => request()->get('recipient-postal_code'),
             'house_number' => request()->get('recipient-house_number'),
-            'addition' => request()->get('recipient-addition'),
+            'addition' => request()->get('recipient-addition')
         ]);
 
         $recipient = Recipient::firstOrCreate([

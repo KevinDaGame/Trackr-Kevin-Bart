@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
 use App\Models\Package;
+use App\Models\Recipient;
+use App\Models\Sender;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -29,26 +31,51 @@ class PackageApiController extends Controller
      */
     public function store(ReportPackageRequest $request)
     {
-        $recipient = $request->get('recipient');
-        $address = $recipient['address'];
-        $addition = $address['addition'] ?? null;
+        $senderData = $request->get('sender');
+        $senderAddressData = $senderData['address'];
+        $senderAddition = $senderAddressData['addition'] ?? null;
 
-        $address = Address::firstOrCreate(
-            [
-                'country' => $address['country'],
-                'city' => $address['city'],
-                'postal_code' => $address['postal_code'],
-                'street' => $address['street'],
-                'house_number' => $address['house_number'],
-                'addition' => $addition,
-            ]
-        );
+        $recipientData = $request->get('recipient');
+        $recipientAddressData = $recipientData['address'];
+        $recipientAddition = $recipientAddressData['addition'] ?? null;
+
+        $senderAddress = Address::firstOrCreate([
+            'country' => $senderAddressData['country'],
+            'street' => $senderAddressData['street'],
+            'city' => $senderAddressData['city'],
+            'postal_code' => $senderAddressData['postal_code'],
+            'house_number' => $senderAddressData['house_number'],
+            'addition' => $senderAddition
+        ]);
+
+        $sender = Sender::firstOrCreate([
+            'name' => $senderData['name'],
+            'address_id' => $senderAddress->id
+        ]);
+
+        $recipientAddress = Address::firstOrCreate([
+            'country' => $recipientAddressData['country'],
+            'street' => $recipientAddressData['street'],
+            'city' => $recipientAddressData['city'],
+            'postal_code' => $recipientAddressData['postal_code'],
+            'house_number' => $recipientAddressData['house_number'],
+            'addition' => $recipientAddition
+        ]);
+
+        $recipient = Recipient::firstOrCreate([
+            'name' => $recipientData['name'],
+            'email_address' => $recipientData['email'],
+            'phone_number' => $recipientData['phone'],
+            'address_id' => $recipientAddress->id
+        ]);
+
         $newPackage = new Package([
-            'sender_id' => $request->get('sender_id'),
-            'address_id' => $address->id,
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
             'notes' => $request->get('notes'),
             'status' => 'Reported'
         ]);
+
         $newPackage->save();
         return json_encode([
                 'success'   => true,
