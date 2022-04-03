@@ -40,3 +40,6 @@ Route::get('/generate-pdfs', [PackageController::class, 'generatePdfs'])->middle
 Route::get('/webshop/tokens', [TokensController::class, 'index']);
 Route::post('deleteToken', [TokensController::class, 'delete']);
 Route::post('createToken', [TokensController::class, 'create']);
+
+Route::get('addpackage', [PackageController::class, 'create'])->middleware('role:webshop');
+Route::post('addpackage', [PackageController::class, 'store'])->middleware('role:webshop');

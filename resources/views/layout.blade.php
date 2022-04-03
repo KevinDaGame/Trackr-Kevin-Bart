@@ -41,8 +41,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/webshop/tokens">{{__('Tokens')}}</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/addpackage" class="nav-link">{{__('Add new package')}}</a>
+                        </li>
                     @endif
-                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @guest

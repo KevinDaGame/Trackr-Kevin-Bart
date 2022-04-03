@@ -25,5 +25,8 @@
     "You have successfully logged out!": "Je bent succesvol uitgelogd!",
     "Your account has been created!": "Uw account is gemaakt!",
     "The selected email is invalid.": "Dit email adres bestaat niet",
-    "Your credentials could not be verified": "Jouw inloggegevens kunnen niet geverifieerd worden"
+    "Your credentials could not be verified": "Jouw inloggegevens kunnen niet geverifieerd worden",
+    "Add new package": "Nieuw pakket aanmelden",
+    "Sender": "Verzender",
+    "Name": "Naam"
 }

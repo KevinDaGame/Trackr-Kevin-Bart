@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Sender;
 use App\Models\Status;
 use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
@@ -23,6 +24,44 @@ class PackageController extends Controller
             'packages' => Package::with(['sender', 'recipient'])->filter(request(['sender', 'receiver', 'status']))->get(),
             'statuses' => Status::pluck('status')
         ]);
+    }
+
+    public function create() {
+        return view('webshop.signupPackage');
+    }
+
+    public function store() {
+
+        request()->validate([
+            'sender-name' => 'required|max:255|min:3',
+            'sender-street' => 'required|max:255',
+            'sender-house_number' => 'required|numeric',
+            'sender-addition' => 'max:2',
+            'sender-postal_code' => 'required|max:255',
+            'sender-city' => 'required|max:255',
+            'sender-country' => 'required|max:255'
+        ]);
+
+        $senderAddress = Address::firstOrCreate([
+            'country' => request()->get('sender-country'),
+            'street' => request()->get('sender-street'),
+            'city' => request()->get('sender-city'),
+            'postal_code' => request()->get('sender-postal_code'),
+            'house_number' => request()->get('sender-house_number'),
+            'addition' => request()->get('sender-addition'),
+        ]);
+
+        $sender = Sender::firstOrCreate([
+           'name' => request()->get('sender-name'),
+           'address_id' => $senderAddress->id
+        ]);
+
+        $package = Package::create([
+            'sender_id' => $sender->id,
+
+        ]);
+
+        return redirect('/')->with('success', 'Your package has been registered');
     }
 
     public function generatePdf() {
