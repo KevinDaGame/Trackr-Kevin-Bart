@@ -45,6 +45,11 @@
                             <a href="/addpackage" class="nav-link">{{__('Add new package')}}</a>
                         </li>
                     @endif
+                    @if($user != null && $user->level() >= 4)
+                        <li class="nav-item">
+                            <a href="/addemployee" class="nav-link">{{__('Add employee')}}</a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @guest

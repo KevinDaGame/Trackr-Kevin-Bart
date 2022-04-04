@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use jeremykenedy\LaravelRoles\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -49,5 +50,29 @@ class RegisterController extends Controller
         auth()->login($user);
 
         return redirect('/')->with('success', 'Your account has been created!');
+    }
+
+    public function addEmployeeView() {
+        return view('register.addEmployee', [
+            'roles' => Role::pluck('name')
+        ]);
+    }
+
+    public function addEmployee() {
+        request()->validate([
+            'first-name' => 'required|max:255|min:3',
+            'last-name' => 'required|max:255|min:3',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|max:255|min:8',
+        ]);
+
+        $user = User::create([
+            'name' => request()->get('first-name') . ' ' . request()->get('last-name'),
+            'email' => request()->get('email'),
+            'password' => bcrypt(request()->get('password')),
+        ]);
+        $user->attachRole(config('roles.models.role')::where('name', '=', request()->get('role'))->first());
+
+        return redirect('/')->with('succes', 'A new employee has been created');
     }
 }

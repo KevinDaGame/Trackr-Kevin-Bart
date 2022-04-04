@@ -44,3 +44,6 @@ Route::post('createToken', [TokensController::class, 'create']);
 Route::get('addpackage', [PackageController::class, 'create'])->middleware('role:webshop');
 Route::post('addpackage', [PackageController::class, 'store'])->middleware('role:webshop');
 Route::post('importcsv', [PackageController::class, 'storeCsv'])->middleware('role:webshop');
+
+Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');
+Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
