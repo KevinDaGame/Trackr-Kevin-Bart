@@ -210,7 +210,8 @@
         </div>
         <div class="row">
             <div class="col-md">
-                <p>Recipient name,Recipient email,Recipient phone,Recipient country,Recipient city,Recipient street,Recipient house number,Recipient postal code,Recipient addition,Notes</p>
+                <p>Recipient name,Recipient email,Recipient phone,Recipient country,Recipient city,Recipient street,Recipient house number,Recipient addition,Recipient postal code,Notes
+                </p>
             </div>
         </div>
         <div class="row">

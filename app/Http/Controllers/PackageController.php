@@ -68,7 +68,9 @@ class PackageController extends Controller
             'status' => 'Reported'
         ]);
 
-        return redirect('/')->with('success', 'Your package has been registered');
+        return view('webshop.packageSignupSuccess', [
+            'packageIds' => [$recipient->email_address => $package->id]
+        ]);
     }
 
     public function storeCsv() {
@@ -76,15 +78,16 @@ class PackageController extends Controller
         $data = array_map('str_getcsv', file($path));
         //remove the header from the file
         unset($data[0]);
+        $packages = [];
 
         foreach ($data as $row) {
             $recipientAddress = Address::firstOrCreate([
                 'country' => $row[3],
                 'street' => $row[5],
                 'city' => $row[4],
-                'postal_code' => $row[7],
+                'postal_code' => $row[8],
                 'house_number' => $row[6],
-                'addition' => $row[8] == "" ? null : $row[8]
+                'addition' => $row[7] == "" ? null : $row[7]
             ]);
 
             $recipient = Recipient::firstOrCreate([
@@ -100,9 +103,13 @@ class PackageController extends Controller
                 'notes' => request()->get('notes'),
                 'status' => 'Reported'
             ]);
+
+            $packages[$row[1]] = $package->id;
         }
 
-        return redirect('/')->with('success', 'Your file has been imported');
+        return view('webshop.packageSignupSuccess', [
+            'packageIds' => $packages
+        ]);
     }
 
     public function generatePdf() {
