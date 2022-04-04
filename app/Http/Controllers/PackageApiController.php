@@ -9,6 +9,7 @@ use App\Models\Recipient;
 use App\Models\Sender;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PackageApiController extends Controller
 {
@@ -31,27 +32,9 @@ class PackageApiController extends Controller
      */
     public function store(ReportPackageRequest $request)
     {
-        $senderData = $request->get('sender');
-        $senderAddressData = $senderData['address'];
-        $senderAddition = $senderAddressData['addition'] ?? null;
-
         $recipientData = $request->get('recipient');
         $recipientAddressData = $recipientData['address'];
         $recipientAddition = $recipientAddressData['addition'] ?? null;
-
-        $senderAddress = Address::firstOrCreate([
-            'country' => $senderAddressData['country'],
-            'street' => $senderAddressData['street'],
-            'city' => $senderAddressData['city'],
-            'postal_code' => $senderAddressData['postal_code'],
-            'house_number' => $senderAddressData['house_number'],
-            'addition' => $senderAddition
-        ]);
-
-        $sender = Sender::firstOrCreate([
-            'name' => $senderData['name'],
-            'address_id' => $senderAddress->id
-        ]);
 
         $recipientAddress = Address::firstOrCreate([
             'country' => $recipientAddressData['country'],
@@ -70,7 +53,7 @@ class PackageApiController extends Controller
         ]);
 
         $newPackage = new Package([
-            'sender_id' => $sender->id,
+            'sender_id' => Auth::user()->sender_id,
             'recipient_id' => $recipient->id,
             'notes' => $request->get('notes'),
             'status' => 'Reported'
@@ -80,8 +63,10 @@ class PackageApiController extends Controller
         return json_encode([
                 'success'   => true,
                 'message'   => 'Succesfully registered package',
-                'data'      => $newPackage]
-        );
+                'data'      => [
+                    'id' => $newPackage->id,
+                    'created_at' => $newPackage->created_at]
+        ]);
     }
 
     /**
