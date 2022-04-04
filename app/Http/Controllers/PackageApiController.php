@@ -61,11 +61,10 @@ class PackageApiController extends Controller
 
         $newPackage->save();
         return json_encode([
-                'success'   => true,
-                'message'   => 'Succesfully registered package',
-                'data'      => [
-                    'id' => $newPackage->id,
-                    'created_at' => $newPackage->created_at]
+            'success' => true,
+            'message' => 'Successfully registered package',
+            'id' => $newPackage->id,
+            'created_at' => $newPackage->created_at
         ]);
     }
 
