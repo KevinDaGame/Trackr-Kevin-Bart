@@ -63,3 +63,7 @@ Route::get('/findpackage', [TrackrController::class, 'index']);
 Route::post('/findPackage', [TrackrController::class, 'findPackage']);
 
 
+Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');
+Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
+Route::get('addwebshop', [RegisterController::class, 'addWebshopView'])->middleware('level:4');
+Route::post('addwebshop', [ RegisterController::class, 'addWebshop'])->middleware('level:4');

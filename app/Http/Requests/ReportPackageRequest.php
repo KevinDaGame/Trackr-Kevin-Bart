@@ -37,13 +37,6 @@ class ReportPackageRequest extends FormRequest
             'recipient.address.postal_code' => 'required|max:10',
             'recipient.phone' => 'required|max:16',
             'recipient.email' => 'required|email|max:255',
-            'sender.name' => 'required|max:255',
-            'sender.address.country' => 'required|max:255',
-            'sender.address.city' => 'required|max:255',
-            'sender.address.street' => 'required|max:255',
-            'sender.address.house_number' => 'required',
-            'sender.address.addition' => 'max:2',
-            'sender.address.postal_code' => 'required|max:10',
         ];
     }
     public function failedValidation(Validator $validator)
