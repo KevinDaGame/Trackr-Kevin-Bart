@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    <title>Packages</title>
+    <title>{{__('Packages')}}</title>
 @endsection
 @section('body')
     <form method="GET" action="#">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,4 +36,10 @@ class Address extends Model
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
     use HasFactory;
+    protected function postalCode(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtoupper(str_replace(' ', '', $value)),
+        );
+    }
 }

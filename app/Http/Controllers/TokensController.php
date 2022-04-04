@@ -33,6 +33,9 @@ class TokensController extends Controller
     }
 
     public function create(Request $request){
+        request()->validate([
+            'tokenName' => 'required'
+            ]);
         if(!Auth::user()->hasRole('webshop')){
             abort(401);
         }
