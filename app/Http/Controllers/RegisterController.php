@@ -24,7 +24,7 @@ class RegisterController extends Controller
             'country' => 'required|max:255',
             'city' => 'required|max:255',
             'street' => 'required|max:255',
-            'postal_code' => 'required|max:255',
+            'postal_code' => 'required|postal_code:NL,DE,FR,BE,LU',
             'house_number' => 'required|numeric',
             'addition' => 'max:2',
 
