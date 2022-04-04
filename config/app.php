@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'nl',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
+        Axlon\PostalCodeValidation\ValidationServiceProvider::class,
 
         /*
          * Package Service Providers...
