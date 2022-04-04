@@ -29,5 +29,8 @@
     "Add new package": "Nieuw pakket aanmelden",
     "Sender": "Verzender",
     "Name": "Naam",
-    "Notes": "Notities"
+    "Notes": "Notities",
+    "Add one package": "Één pakket aanmelden",
+    "Import a csv with multiple packages": "Een csv met meerdere pakketten importeren",
+    "Make sure the csv uses the following headers": "Zorg dat de csv de volgende headers gebruikt"
 }

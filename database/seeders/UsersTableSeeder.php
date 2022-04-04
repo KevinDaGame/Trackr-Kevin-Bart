@@ -64,6 +64,7 @@ class UsersTableSeeder extends Seeder
             $newUser = config('roles.models.defaultUser')::create([
                 'name'     => 'Webshop',
                 'email'    => 'webshop@trackr.com',
+                'sender_id' => 1,
                 'password' => bcrypt('password'),
             ]);
 

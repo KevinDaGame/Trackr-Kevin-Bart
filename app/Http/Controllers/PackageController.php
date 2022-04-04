@@ -33,13 +33,6 @@ class PackageController extends Controller
 
     public function store() {
         request()->validate([
-            'sender-name' => 'required|max:255|min:3',
-            'sender-street' => 'required|max:255',
-            'sender-house_number' => 'required|numeric',
-            'sender-addition' => 'max:2',
-            'sender-postal_code' => 'required|max:255',
-            'sender-city' => 'required|max:255',
-            'sender-country' => 'required|max:255',
             'recipient-name' => 'required|max:255|min:3',
             'recipient-street' => 'required|max:255',
             'recipient-house_number' => 'required|numeric',
@@ -50,20 +43,6 @@ class PackageController extends Controller
             'recipient-phone_number' => 'required|max:16',
             'recipient-email'=> 'required|email|max:255',
             'notes' => 'max:65535'
-        ]);
-
-        $senderAddress = Address::firstOrCreate([
-            'country' => request()->get('sender-country'),
-            'street' => request()->get('sender-street'),
-            'city' => request()->get('sender-city'),
-            'postal_code' => request()->get('sender-postal_code'),
-            'house_number' => request()->get('sender-house_number'),
-            'addition' => request()->get('sender-addition')
-        ]);
-
-        $sender = Sender::firstOrCreate([
-           'name' => request()->get('sender-name'),
-           'address_id' => $senderAddress->id
         ]);
 
         $recipientAddress = Address::firstOrCreate([
@@ -83,7 +62,7 @@ class PackageController extends Controller
         ]);
 
         $package = Package::create([
-            'sender_id' => $sender->id,
+            'sender_id' => Auth::user()->sender_id,
             'recipient_id' => $recipient->id,
             'notes' => request()->get('notes'),
             'status' => 'Reported'
@@ -95,9 +74,35 @@ class PackageController extends Controller
     public function storeCsv() {
         $path = request()->file('csv_file')->getRealPath();
         $data = array_map('str_getcsv', file($path));
-        dd($data);
-        //TODO: parse data
-        //TODO: offer csv file template
+        //remove the header from the file
+        unset($data[0]);
+
+        foreach ($data as $row) {
+            $recipientAddress = Address::firstOrCreate([
+                'country' => $row[3],
+                'street' => $row[5],
+                'city' => $row[4],
+                'postal_code' => $row[7],
+                'house_number' => $row[6],
+                'addition' => $row[8] == "" ? null : $row[8]
+            ]);
+
+            $recipient = Recipient::firstOrCreate([
+                'name' => $row[0],
+                'email_address' => $row[1],
+                'phone_number' => $row[2],
+                'address_id' => $recipientAddress->id
+            ]);
+
+            $package = Package::create([
+                'sender_id' => Auth::user()->sender_id,
+                'recipient_id' => $recipient->id,
+                'notes' => request()->get('notes'),
+                'status' => 'Reported'
+            ]);
+        }
+
+        return redirect('/')->with('success', 'Your file has been imported');
     }
 
     public function generatePdf() {
