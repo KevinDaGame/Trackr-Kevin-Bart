@@ -53,6 +53,7 @@
                     @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="/login">{{__('Login')}}</a>
@@ -62,6 +63,11 @@
                         </li>
                     @endguest
                     @auth()
+                        @if($user != null && $user->level() == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="/trackr/packages">{{__('My packages')}}</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">{{__('Logout')}}</a>
                         </li>

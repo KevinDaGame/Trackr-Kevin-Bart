@@ -61,6 +61,8 @@ Route::post('importcsv', [PackageController::class, 'storeCsv'])->middleware('ro
 
 Route::get('/findpackage', [TrackrController::class, 'index']);
 Route::post('/findPackage', [TrackrController::class, 'findPackage']);
+Route::get('/trackr/packages', [TrackrController::class, 'packages'])->middleware('role:customer');
+Route::post('/trackr/savepackage', [TrackrController::class, 'savePackage'])->middleware('role:customer');
 
 
 Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');

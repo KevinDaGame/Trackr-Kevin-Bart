@@ -48,7 +48,10 @@ class Package extends Model
     public function sender(){
         return $this->belongsTo(Sender::class);
     }
-
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
     public function recipient(){
         return $this->belongsTo(Recipient::class);
     }
