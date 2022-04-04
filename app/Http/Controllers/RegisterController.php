@@ -30,7 +30,7 @@ class RegisterController extends Controller
 
         ]);
 
-        $address = Address::create([
+        $address = Address::firstOrCreate([
             'country' => request()->get('country'),
             'street' => request()->get('street'),
             'city' => request()->get('city'),

@@ -48,7 +48,7 @@
         <tbody>
             @foreach($customers as $customer)
                 <tr class="table-primary">
-                    <td>{{ $customer->fullName() }}</td>
+                    <td>{{ $customer->name }}</td>
                     <td>{{ $customer->email_address }}</td>
                     <td>{{ $customer->phone_number }}</td>
                     <td>{{ $customer->address->street }}</td>

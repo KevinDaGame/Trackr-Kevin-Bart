@@ -60,17 +60,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $recipient_1 = Recipient::create([
-            'first_name'=>'Jan',
-            'middle_name'=>'',
-            'last_name'=>'Pan',
+            'name'=>'Jan Pan',
             'email_address'=>'jan@pannetje.nl',
             'phone_number'=>'0638653289',
             'address_id' => $address_1->id
         ]);
         $recipient_2 = Recipient::create([
-            'first_name'=>'Bart',
-            'middle_name'=>'van',
-            'last_name'=>'Tiel',
+            'name'=>'Bart van Tiel',
             'email_address'=>'bart@mail.nl',
             'phone_number'=>'0638653289',
             'address_id' => $address_3->id
@@ -84,14 +80,12 @@ class DatabaseSeeder extends Seeder
         $package_1 = Package::create([
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_1->id,
-            'address_id' => $address_1->id,
             'status' => 'In transit',
             'sent_date' => '2022-03-02 11:28:22'
         ]);
         $package_2 = Package::create([
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_2->id,
-            'address_id' => $address_1->id,
             'status' => 'Reported',
             'sent_date' => '2022-03-02 11:28:22'
         ]);

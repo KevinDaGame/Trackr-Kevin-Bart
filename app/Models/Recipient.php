@@ -60,9 +60,7 @@ class Recipient extends Model
     public function scopeFilter($query, array $filters) {
         if ($filters['name'] ?? false) {
             $query
-                ->where('first_name' ,'like', '%' . request('name') . '%')
-                ->orWhere('middle_name', 'like', '%' . request('name') . '%')
-                ->orWhere('last_name', 'like', '%' . request('name') . '%');
+                ->where('name' ,'like', '%' . request('name') . '%');
         }
 
         if ($filters['country'] ?? false) {

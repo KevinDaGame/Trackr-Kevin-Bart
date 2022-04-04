@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Recipient;
+use App\Models\Sender;
 use App\Models\Status;
 use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
@@ -23,6 +25,84 @@ class PackageController extends Controller
             'packages' => Package::with(['sender', 'recipient'])->filter(request(['sender', 'receiver', 'status']))->get(),
             'statuses' => Status::pluck('status')
         ]);
+    }
+
+    public function create() {
+        return view('webshop.signupPackage');
+    }
+
+    public function store() {
+        request()->validate([
+            'recipient-name' => 'required|max:255|min:3',
+            'recipient-street' => 'required|max:255',
+            'recipient-house_number' => 'required|numeric',
+            'recipient-addition' => 'max:2',
+            'recipient-postal_code' => 'required|max:255',
+            'recipient-city' => 'required|max:255',
+            'recipient-country' => 'required|max:255',
+            'recipient-phone_number' => 'required|max:16',
+            'recipient-email'=> 'required|email|max:255',
+            'notes' => 'max:65535'
+        ]);
+
+        $recipientAddress = Address::firstOrCreate([
+            'country' => request()->get('recipient-country'),
+            'street' => request()->get('recipient-street'),
+            'city' => request()->get('recipient-city'),
+            'postal_code' => request()->get('recipient-postal_code'),
+            'house_number' => request()->get('recipient-house_number'),
+            'addition' => request()->get('recipient-addition')
+        ]);
+
+        $recipient = Recipient::firstOrCreate([
+            'name' => request()->get('recipient-name'),
+            'email_address' => request()->get('recipient-email'),
+            'phone_number' => request()->get('recipient-phone_number'),
+            'address_id' => $recipientAddress->id
+        ]);
+
+        $package = Package::create([
+            'sender_id' => Auth::user()->sender_id,
+            'recipient_id' => $recipient->id,
+            'notes' => request()->get('notes'),
+            'status' => 'Reported'
+        ]);
+
+        return redirect('/')->with('success', 'Your package has been registered');
+    }
+
+    public function storeCsv() {
+        $path = request()->file('csv_file')->getRealPath();
+        $data = array_map('str_getcsv', file($path));
+        //remove the header from the file
+        unset($data[0]);
+
+        foreach ($data as $row) {
+            $recipientAddress = Address::firstOrCreate([
+                'country' => $row[3],
+                'street' => $row[5],
+                'city' => $row[4],
+                'postal_code' => $row[7],
+                'house_number' => $row[6],
+                'addition' => $row[8] == "" ? null : $row[8]
+            ]);
+
+            $recipient = Recipient::firstOrCreate([
+                'name' => $row[0],
+                'email_address' => $row[1],
+                'phone_number' => $row[2],
+                'address_id' => $recipientAddress->id
+            ]);
+
+            $package = Package::create([
+                'sender_id' => Auth::user()->sender_id,
+                'recipient_id' => $recipient->id,
+                'notes' => request()->get('notes'),
+                'status' => 'Reported'
+            ]);
+        }
+
+        return redirect('/')->with('success', 'Your file has been imported');
     }
 
     public function generatePdf() {
