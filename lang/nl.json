@@ -32,5 +32,11 @@
     "Notes": "Notities",
     "Add one package": "Één pakket aanmelden",
     "Import a csv with multiple packages": "Een csv met meerdere pakketten importeren",
-    "Make sure the csv uses the following headers": "Zorg dat de csv de volgende headers gebruikt"
+    "Make sure the csv uses the following headers": "Zorg dat de csv de volgende headers gebruikt",
+    "Add employee": "Nieuwe medewerker toevoegen",
+    "Add webshop": "Nieuwe webshop toevoegen",
+    "Login information": "Inloggegevens",
+    "Company information": "Bedrijfsgegevens",
+    "Company name": "Bedrijfsnaam",
+    "The following packages are succesfully added": "De volgende pakketten zijn succesvol toegevoegd"
 }
