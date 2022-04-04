@@ -38,5 +38,20 @@
     "Login information": "Inloggegevens",
     "Company information": "Bedrijfsgegevens",
     "Company name": "Bedrijfsnaam",
-    "The following packages are succesfully added": "De volgende pakketten zijn succesvol toegevoegd"
+    "The following packages are succesfully added": "De volgende pakketten zijn succesvol toegevoegd",
+    "Enter your track and trace code and postal code to find your package": "Vul uw post- en tracn & trace code in om uw pakket te vinden",
+    "Track and trace code": "Track en trace code",
+    "Search": "Zoeken",
+    "Current status": "Huidige status",
+    "Reported": "Aangemeld",
+    "printed": "Geprint",
+    "Sorted": "Gesorteerd",
+    "In transit": "Onderweg",
+    "Delivered to sorting center": "Afgeleverd aan het sorteercentrum",
+    "Delivered": "Bezorgd",
+    "Last update: ": "Laatste update: ",
+    "Delivered at: ": "Bezorgt op: ",
+    "Sent at: ": "Verzonden op: ",
+    "My packages": "Mijn paketten"
+
 }

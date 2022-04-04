@@ -7,12 +7,11 @@
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Sender</th>
-            <th scope="col">Recipient</th>
-            <th scope="col">Status</th>
+            <th scope="col">{{__('Sender')}}</th>
+            <th scope="col">{{__('Recipient')}}</th>
+            <th scope="col">{{__('Status')}}</th>
         </tr>
         </thead>
-        <form method="GET" action="generate-pdfs" id="selected-packages">
             <tbody>
             @foreach($packages as $package)
                 <tr class="table-primary">
@@ -23,5 +22,4 @@
                 </tr>
             @endforeach
             </tbody>
-        </form>
 @endsection
