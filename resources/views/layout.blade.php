@@ -67,11 +67,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/trackr/packages">{{__('My packages')}}</a>
                             </li>
-                            @endlevel
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">{{__('Logout')}}</a>
-                            </li>
-                        @endauth
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">{{__('Logout')}}</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
