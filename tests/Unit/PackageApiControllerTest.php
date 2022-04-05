@@ -11,11 +11,9 @@ class PackageApiControllerTest extends TestCase
     public function testGetNewPackageStatus() {
         //arrange
         $statusId = 1;
-        $package = new Package();
-        $package->status_id = $statusId;
         $controller = new PackageApiController();
         //act
-        $result = $controller->getNewPackageStatus(0, $package);
+        $result = $controller->getNewPackageStatus(0, $statusId);
         //assert
         Self::assertEquals($statusId + 1, $result);
     }
@@ -24,11 +22,9 @@ class PackageApiControllerTest extends TestCase
         //arrange
         $statusId = 1;
         $newStatusId = 3;
-        $package = new Package();
-        $package->status_id = $statusId;
         $controller = new PackageApiController();
         //act
-        $result = $controller->getNewPackageStatus($newStatusId, $package);
+        $result = $controller->getNewPackageStatus($newStatusId, $statusId);
         //assert
         Self::assertEquals($newStatusId, $result);
     }
