@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ReportPackageRequest extends FormRequest
 {
@@ -15,7 +16,6 @@ class ReportPackageRequest extends FormRequest
      */
     public function authorize()
     {
-        //TODO Make this variable!!!!!!
         return true;
     }
 

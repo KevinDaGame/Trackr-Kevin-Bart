@@ -65,7 +65,7 @@ class PackageController extends Controller
             'sender_id' => Auth::user()->sender_id,
             'recipient_id' => $recipient->id,
             'notes' => request()->get('notes'),
-            'status' => 'Reported'
+            'status_id' => '1'
         ]);
 
         return view('webshop.packageSignupSuccess', [
@@ -101,7 +101,7 @@ class PackageController extends Controller
                 'sender_id' => Auth::user()->sender_id,
                 'recipient_id' => $recipient->id,
                 'notes' => request()->get('notes'),
-                'status' => 'Reported'
+                'status_id' => '1'
             ]);
 
             $packages[$row[1]] = $package->id;

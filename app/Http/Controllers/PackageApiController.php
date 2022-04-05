@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportPackageRequest;
+use App\Http\Requests\UpdatePackageRequest;
 use App\Models\Address;
 use App\Models\Package;
 use App\Models\Recipient;
@@ -24,12 +25,27 @@ class PackageApiController extends Controller
         return response()->json($packages);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return false|string
-     */
+    public function update(UpdatePackageRequest $request)
+    {
+        $package = Package::find($request->id);
+        $webshop = Sender::find(Auth::user()->sender_id);
+        if ($package->sender_id == $webshop->id) {
+            if($request->has('status_id')) {
+                $package->status_id = $request->status_id;
+            }
+            else if($package->status_id <= 6) {
+                $package->status_id++;
+            }
+            $package->save();
+        }
+        return json_encode([
+            'success' => true,
+            'message' => 'Successfully updated the status of this package',
+            'package' => $package->id,
+            'status' => $package->status->status
+        ]);
+    }
+
     public function store(ReportPackageRequest $request)
     {
         $recipientData = $request->get('recipient');
@@ -56,7 +72,7 @@ class PackageApiController extends Controller
             'sender_id' => Auth::user()->sender_id,
             'recipient_id' => $recipient->id,
             'notes' => $request->get('notes'),
-            'status' => 'Reported'
+            'status_id' => '1'
         ]);
 
         $newPackage->save();
@@ -68,48 +84,5 @@ class PackageApiController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Package $package)
-    {
-        return null;
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Package $package)
-    {
-        return null;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Package $package)
-    {
-        return null;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Package $package)
-    {
-        return null;
-    }
 }
