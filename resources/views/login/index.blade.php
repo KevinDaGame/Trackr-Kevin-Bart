@@ -36,7 +36,7 @@
                 @enderror
             </div>
 
-            <input type="submit" class="btn btn-primary" value="{{__('Submit')}}">
+            <input type="submit" class="btn btn-primary" id="login" value="{{__('Submit')}}">
 
         </form>
     </main>

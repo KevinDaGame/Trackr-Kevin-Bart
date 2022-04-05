@@ -27,7 +27,7 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/">Home</a>
                     </li>
-                    @level(2)
+                    @level(3)
                     <li class="nav-item">
                         <a class="nav-link" href="/packages">{{__('Packages')}}</a>
                     </li>
