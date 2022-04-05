@@ -84,5 +84,4 @@ class PackageApiController extends Controller
         ]);
     }
 
-
 }
