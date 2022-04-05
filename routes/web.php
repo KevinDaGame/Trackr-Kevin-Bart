@@ -69,3 +69,5 @@ Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middl
 Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
 Route::get('addwebshop', [RegisterController::class, 'addWebshopView'])->middleware('level:4');
 Route::post('addwebshop', [ RegisterController::class, 'addWebshop'])->middleware('level:4');
+Route::get('editpackage', [PackageController::class, 'editPackageView'])->middleware('level:4');
+Route::post('editpackage', [PackageController::class, 'editPackage'])->middleware('level:4');
