@@ -27,32 +27,33 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/">Home</a>
                     </li>
-                    @if($user != null && $user->level() >=3)
-                        <li class="nav-item">
-                            <a class="nav-link" href="/packages">{{__('Packages')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/customers">{{__('Customers')}}</a>
-                        </li>
-                    @endif
-                    @if($user != null && $user->hasRole('webshop'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="/webshop/tokens">{{__('Tokens')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/addpackage" class="nav-link">{{__('Add new package')}}</a>
-                        </li>
-                    @endif
-                    @if($user != null && $user->level() >= 4)
-                        <li class="nav-item">
-                            <a href="/addemployee" class="nav-link">{{__('Add employee')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/addwebshop" class="nav-link">{{__('Add webshop')}}</a>
-                        </li>
-                    @endif
+                    @level(2)
+                    <li class="nav-item">
+                        <a class="nav-link" href="/packages">{{__('Packages')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customers">{{__('Customers')}}</a>
+                    </li>
+                    @endlevel
+                    @role('webshop')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/webshop/tokens">{{__('Tokens')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/addpackage" class="nav-link">{{__('Add new package')}}</a>
+                    </li>
+                    @endlevel
+                    @level(4)
+                    <li class="nav-item">
+                        <a href="/addemployee" class="nav-link">{{__('Add employee')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/addwebshop" class="nav-link">{{__('Add webshop')}}</a>
+                    </li>
+                    @endlevel
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="/login">{{__('Login')}}</a>
@@ -62,6 +63,11 @@
                         </li>
                     @endguest
                     @auth()
+                        @if($user != null && $user->level() == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="/trackr/packages">{{__('My packages')}}</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">{{__('Logout')}}</a>
                         </li>
