@@ -64,6 +64,11 @@
                     <td>
                         <a href="/generate-pdf?id={{$package->id}}">{{__('Download as pdf')}}</a>
                     </td>
+                    @level(4)
+                    <td>
+                        <a href="/editpackage?id={{$package->id}}">{{__('Edit')}}</a>
+                    </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

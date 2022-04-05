@@ -177,4 +177,49 @@ class PackageController extends Controller
 
         return redirect('/')->with('succes', 'Pickup moment successfully registered');
     }
+
+    public function editPackageView() {
+        return view('editPackage', [
+            'package' => Package::With('recipient.address', 'recipient')->find(request('id'))
+        ]);
+    }
+
+    public function editPackage() {
+        request()->validate([
+            'recipient-name' => 'required|max:255|min:3',
+            'recipient-street' => 'required|max:255',
+            'recipient-house_number' => 'required|numeric',
+            'recipient-addition' => 'max:2',
+            'recipient-postal_code' => 'required|max:255',
+            'recipient-city' => 'required|max:255',
+            'recipient-country' => 'required|max:255',
+            'recipient-phone_number' => 'required|max:16',
+            'recipient-email'=> 'required|email|max:255',
+            'notes' => 'max:65535'
+        ]);
+
+        $package = Package::With('recipient.address', 'recipient')->find(request()->get('packageId'));
+        $recipient = $package->recipient;
+        $address = $recipient->address;
+        $address->update([
+            'country' => request()->get('recipient-country'),
+            'street' => request()->get('recipient-street'),
+            'city' => request()->get('recipient-city'),
+            'postal_code' => request()->get('recipient-postal_code'),
+            'house_number' => request()->get('recipient-house_number'),
+            'addition' => request()->get('recipient-addition')
+        ]);
+
+        $recipient->update([
+            'name' => request()->get('recipient-name'),
+            'email_address' => request()->get('recipient-email'),
+            'phone_number' => request()->get('recipient-phone_number')
+        ]);
+
+        $package->update([
+            'notes' => request()->get('notes')
+        ]);
+
+        return redirect('/packages')->with('success', 'Your edit has been processed');
+    }
 }
