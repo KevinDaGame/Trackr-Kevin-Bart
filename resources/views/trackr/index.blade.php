@@ -27,7 +27,7 @@
     @if(isset($package))
         <div class="row text-center">
             <h1>{{__('Current status')}}</h1>
-            <h3>{{__($package->status)}}</h3>
+            <h3>{{__($package->status->status)}}</h3>
             @if($package->delivered_date != null)
                 <p>{{__('Delivered at: ')}}<span>{{$package->delivered_date}}</span></p>
             @elseif($package->sent_date != null)

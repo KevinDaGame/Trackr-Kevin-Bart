@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
-    protected $fillable = ['status'];
+    protected $fillable = ['status', 'id'];
     use HasFactory;
-    public $incrementing = false;
 }

@@ -43,7 +43,7 @@ class SignupPackageTest extends DuskTestCase
         $package = Package::create([
             'sender_id' => '1',
             'recipient_id' => '1',
-            'status' => 'Printed'
+            'status_id' => '2'
         ]);
         $this->browse(function (Browser $browser) use ($package) {
             $browser->visit('/findpackage')
