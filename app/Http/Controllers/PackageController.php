@@ -21,7 +21,7 @@ class PackageController extends Controller
         }
         return view('packages', [
             'packages' => Package::with(['sender', 'recipient'])->filter(request(['sender', 'receiver', 'status']))->get(),
-            'statuses' => Status::pluck('status')
+            'statuses' => Status::all()
         ]);
     }
 
