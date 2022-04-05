@@ -152,7 +152,7 @@ class PackageController extends Controller
 
     public function requestPickupView() {
         return view('pickup', [
-            'packages' => Package::with(['sender', 'recipient'])->where('status', '=', 'Reported')->where('transporter', '=', null)->get()
+            'packages' => Package::with(['sender', 'recipient'])->where('status_id', '=', '1')->where('transporter', '=', null)->get()
         ]);
     }
 
