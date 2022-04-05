@@ -84,5 +84,14 @@ class PackageApiController extends Controller
         ]);
     }
 
+    public function getNewPackageStatus(int $id, $package): int
+    {
+        if ($id > 0) {
 
+            return $id;
+        } else if ($package->status_id <= 6) {
+            return $package->status_id + 1;
+        }
+        return $package->status_id;
+    }
 }
