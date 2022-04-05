@@ -56,7 +56,7 @@
                     @endlevel
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-
+                    @include('language')
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="/login">{{__('Login')}}</a>
