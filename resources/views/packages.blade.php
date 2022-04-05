@@ -62,7 +62,7 @@
                     <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
                     <td>{{__($package->status->status)}}</td>
                     <td>
-                        <a href="/generate-pdf?id={{$package->id}}">Download als pdf</a>
+                        <a href="/generate-pdf?id={{$package->id}}">{{__('Download as pdf')}}</a>
                     </td>
                 </tr>
             @endforeach

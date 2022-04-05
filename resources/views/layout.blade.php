@@ -45,6 +45,9 @@
                     @endlevel
                     @level(4)
                     <li class="nav-item">
+                        <a href="/requestpickup" class="nav-link">{{__('Request pickup')}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/addemployee" class="nav-link">{{__('Add employee')}}</a>
                     </li>
                     <li class="nav-item">
