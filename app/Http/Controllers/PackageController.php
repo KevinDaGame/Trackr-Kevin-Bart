@@ -8,6 +8,7 @@ use App\Models\Sender;
 use App\Models\Status;
 use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
+use App\Services\PackageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -45,31 +46,8 @@ class PackageController extends Controller
             'notes' => 'max:65535'
         ]);
 
-        $recipientAddress = Address::firstOrCreate([
-            'country' => request()->get('recipient-country'),
-            'street' => request()->get('recipient-street'),
-            'city' => request()->get('recipient-city'),
-            'postal_code' => request()->get('recipient-postal_code'),
-            'house_number' => request()->get('recipient-house_number'),
-            'addition' => request()->get('recipient-addition')
-        ]);
-
-        $recipient = Recipient::firstOrCreate([
-            'name' => request()->get('recipient-name'),
-            'email_address' => request()->get('recipient-email'),
-            'phone_number' => request()->get('recipient-phone_number'),
-            'address_id' => $recipientAddress->id
-        ]);
-
-        $package = Package::create([
-            'sender_id' => Auth::user()->sender_id,
-            'recipient_id' => $recipient->id,
-            'notes' => request()->get('notes'),
-            'status_id' => '1'
-        ]);
-
         return view('webshop.packageSignupSuccess', [
-            'packageIds' => [$recipient->email_address => $package->id]
+            'packageIds' => [request()->get('recipient-email') => PackageService::CreatePackage(request()->all())]
         ]);
     }
 
@@ -78,37 +56,9 @@ class PackageController extends Controller
         $data = array_map('str_getcsv', file($path));
         //remove the header from the file
         unset($data[0]);
-        $packages = [];
-
-        foreach ($data as $row) {
-            $recipientAddress = Address::firstOrCreate([
-                'country' => $row[3],
-                'street' => $row[5],
-                'city' => $row[4],
-                'postal_code' => $row[8],
-                'house_number' => $row[6],
-                'addition' => $row[7] == "" ? null : $row[7]
-            ]);
-
-            $recipient = Recipient::firstOrCreate([
-                'name' => $row[0],
-                'email_address' => $row[1],
-                'phone_number' => $row[2],
-                'address_id' => $recipientAddress->id
-            ]);
-
-            $package = Package::create([
-                'sender_id' => Auth::user()->sender_id,
-                'recipient_id' => $recipient->id,
-                'notes' => request()->get('notes'),
-                'status_id' => '1'
-            ]);
-
-            $packages[$row[1]] = $package->id;
-        }
 
         return view('webshop.packageSignupSuccess', [
-            'packageIds' => $packages
+            'packageIds' => PackageService::CreatePackages($data)
         ]);
     }
 
