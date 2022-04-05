@@ -60,7 +60,7 @@
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
-                    <td>{{$package->status}}</td>
+                    <td>{{__($package->status->status)}}</td>
                     <td>
                         <a href="/generate-pdf?id={{$package->id}}">Download als pdf</a>
                     </td>

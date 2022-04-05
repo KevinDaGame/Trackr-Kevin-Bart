@@ -18,7 +18,7 @@
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
-                    <td>{{$package->status}}</td>
+                    <td>{{$package->status->status}}</td>
                 </tr>
             @endforeach
             </tbody>

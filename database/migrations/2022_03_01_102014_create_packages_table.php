@@ -18,11 +18,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignId("sender_id");
             $table->foreignId("recipient_id");
+            $table->foreignId('status_id');
             $table->text('notes')->nullable(true);
             $table->dateTime('sent_date')->nullable();
             $table->dateTime('delivered_date')->nullable();
-            $table->string('status');
-            $table->foreign('status')->references('status')->on('statuses');
 
             $table->timestamps();
         });
