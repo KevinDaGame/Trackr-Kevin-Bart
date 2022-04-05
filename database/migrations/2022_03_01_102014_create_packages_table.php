@@ -23,7 +23,8 @@ return new class extends Migration
             $table->dateTime('delivered_date')->nullable();
             $table->string('status');
             $table->foreign('status')->references('status')->on('statuses');
-
+            $table->string('transporter')->nullable();
+            $table->date('pickup_date')->nullable();
             $table->timestamps();
         });
     }

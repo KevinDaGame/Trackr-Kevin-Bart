@@ -64,8 +64,10 @@ Route::post('/findPackage', [TrackrController::class, 'findPackage']);
 Route::get('/trackr/packages', [TrackrController::class, 'packages'])->middleware('role:customer');
 Route::post('/trackr/savepackage', [TrackrController::class, 'savePackage'])->middleware('role:customer');
 
-
 Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');
 Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
 Route::get('addwebshop', [RegisterController::class, 'addWebshopView'])->middleware('level:4');
-Route::post('addwebshop', [ RegisterController::class, 'addWebshop'])->middleware('level:4');
+Route::post('addwebshop', [RegisterController::class, 'addWebshop'])->middleware('level:4');
+
+Route::get('requestpickup', [PackageController::class, 'requestPickupView'])->middleware('level:4');
+Route::post('requestpickup', [PackageController::class, 'requestPickup'])->middleware('level:4');
