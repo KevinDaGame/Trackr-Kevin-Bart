@@ -22,7 +22,8 @@ return new class extends Migration
             $table->text('notes')->nullable(true);
             $table->dateTime('sent_date')->nullable();
             $table->dateTime('delivered_date')->nullable();
-
+            $table->string('transporter')->nullable();
+            $table->date('pickup_date')->nullable();
             $table->timestamps();
         });
     }

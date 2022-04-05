@@ -45,6 +45,9 @@
                     @endlevel
                     @level(4)
                     <li class="nav-item">
+                        <a href="/requestpickup" class="nav-link">{{__('Request pickup')}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/addemployee" class="nav-link">{{__('Add employee')}}</a>
                     </li>
                     <li class="nav-item">
@@ -53,7 +56,7 @@
                     @endlevel
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-
+                    @include('language')
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="/login">{{__('Login')}}</a>

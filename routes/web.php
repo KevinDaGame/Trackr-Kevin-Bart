@@ -35,11 +35,18 @@ Route::get('/', function () {
     }
     return redirect('findpackage');
 });
+
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
+
 Route::get('/roletest', function () {
     return view('roletest');
 });
-Route::get('/packages', [PackageController::class, 'index']);
-Route::get('/customers', [CustomerController::class, 'index']);
+Route::get('/packages', [PackageController::class, 'index'])->middleware(['level:3']);
+Route::get('/customers', [CustomerController::class, 'index'])->middleware(['level:3']);
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
@@ -51,9 +58,9 @@ Route::get('/generate-pdf', [PackageController::class, 'generatePdf'])->middlewa
 
 Route::get('/generate-pdfs', [PackageController::class, 'generatePdfs'])->middleware(['level:3']);
 
-Route::get('/webshop/tokens', [TokensController::class, 'index']);
-Route::post('deleteToken', [TokensController::class, 'delete']);
-Route::post('createToken', [TokensController::class, 'create']);
+Route::get('/webshop/tokens', [TokensController::class, 'index'])->middleware('role:webshop');
+Route::post('deleteToken', [TokensController::class, 'delete'])->middleware('role:webshop');
+Route::post('createToken', [TokensController::class, 'create'])->middleware('role:webshop');
 
 Route::get('addpackage', [PackageController::class, 'create'])->middleware('role:webshop');
 Route::post('addpackage', [PackageController::class, 'store'])->middleware('role:webshop');
@@ -64,10 +71,13 @@ Route::post('/findPackage', [TrackrController::class, 'findPackage']);
 Route::get('/trackr/packages', [TrackrController::class, 'packages'])->middleware('role:customer');
 Route::post('/trackr/savepackage', [TrackrController::class, 'savePackage'])->middleware('role:customer');
 
-
 Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');
 Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
 Route::get('addwebshop', [RegisterController::class, 'addWebshopView'])->middleware('level:4');
+Route::post('addwebshop', [RegisterController::class, 'addWebshop'])->middleware('level:4');
 Route::post('addwebshop', [ RegisterController::class, 'addWebshop'])->middleware('level:4');
 Route::get('editpackage', [PackageController::class, 'editPackageView'])->middleware('level:4');
 Route::post('editpackage', [PackageController::class, 'editPackage'])->middleware('level:4');
+
+Route::get('requestpickup', [PackageController::class, 'requestPickupView'])->middleware('level:4');
+Route::post('requestpickup', [PackageController::class, 'requestPickup'])->middleware('level:4');

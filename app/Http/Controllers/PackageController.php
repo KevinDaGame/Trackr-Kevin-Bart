@@ -120,7 +120,6 @@ class PackageController extends Controller
         $barcode = Barcode1d::create("C128", Str::limit($package->id, 16, ""))->toHtml();
 
         $data = [
-            'title' => 'Dit is een label',
             'date' => date('d/m/y'),
             'package' => $package,
             'barcode' => $barcode
@@ -137,7 +136,6 @@ class PackageController extends Controller
         }
         $packageIds = $request->query();
         $data = [
-            'title' => 'Dit is een label',
             'date' => date('d/m/y'),
             'packages' => [],
             'barcodes' => []
@@ -150,6 +148,34 @@ class PackageController extends Controller
 
         $pdf = Pdf::loadView('myBigPDF', $data);
         return $pdf->stream('labels.pdf');
+    }
+
+    public function requestPickupView() {
+        return view('pickup', [
+            'packages' => Package::with(['sender', 'recipient'])->where('status_id', '=', '1')->where('transporter', '=', null)->get()
+        ]);
+    }
+
+    public function requestPickup() {
+        date_default_timezone_set("Europe/Amsterdam");
+        if (date('H') > 15) {
+            request()->validate([
+                'time' => 'date|after:tomorrow'
+            ]);
+        } else {
+            request()->validate([
+                'time' => 'date|after:+2 Days'
+            ]);
+        }
+
+        foreach (request()->get('package') as $id) {
+            $package = Package::find($id);
+            $package->transporter = request()->get('transporter');
+            $package->pickup_date = request()->get('time');
+            $package->save();
+        }
+
+        return redirect('/')->with('succes', 'Pickup moment successfully registered');
     }
 
     public function editPackageView() {
