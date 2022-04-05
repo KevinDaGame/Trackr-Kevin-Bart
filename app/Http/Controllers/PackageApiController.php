@@ -8,7 +8,7 @@ use App\Models\Address;
 use App\Models\Package;
 use App\Models\Recipient;
 use App\Models\Sender;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +17,7 @@ class PackageApiController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Sender;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use jeremykenedy\LaravelRoles\Models\Role;
 
@@ -36,13 +35,15 @@ class RegisterController extends Controller
         return redirect('/')->with('success', 'Your account has been created!');
     }
 
-    public function addEmployeeView() {
+    public function addEmployeeView()
+    {
         return view('register.addEmployee', [
             'roles' => Role::pluck('name')
         ]);
     }
 
-    public function addEmployee() {
+    public function addEmployee()
+    {
         request()->validate([
             'first-name' => 'required|max:255|min:3',
             'last-name' => 'required|max:255|min:3',
@@ -60,11 +61,13 @@ class RegisterController extends Controller
         return redirect('/')->with('succes', 'A new employee has been created');
     }
 
-    public function addWebshopView() {
+    public function addWebshopView()
+    {
         return view('register.addWebshop');
     }
 
-    public function addWebshop() {
+    public function addWebshop()
+    {
         request()->validate([
             'first-name' => 'required|max:255|min:2',
             'last-name' => 'required|max:255|min:2',

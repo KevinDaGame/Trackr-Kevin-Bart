@@ -1,12 +1,15 @@
 <?php namespace App\Services;
+
 use App\Models\Address;
 use App\Models\Package;
 use App\Models\Recipient;
 use Illuminate\Support\Facades\Auth;
 
-class PackageService {
+class PackageService
+{
 
-    public static function CreatePackage($data) {
+    public static function CreatePackage($data)
+    {
         $recipientAddress = Address::firstOrCreate([
             'country' => $data['recipient-country'],
             'street' => $data['recipient-street'],
@@ -32,7 +35,8 @@ class PackageService {
         return $package->id;
     }
 
-    public static function CreatePackages($data){
+    public static function CreatePackages($data)
+    {
         $packages = [];
 
         foreach ($data as $row) {

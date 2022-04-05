@@ -3,23 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
-use App\Models\Recipient;
-use App\Models\Sender;
 use App\Models\Status;
-use App\Http\Requests\ReportPackageRequest;
-use App\Models\Address;
 use App\Services\PackageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Jorgenwdm\Barcode\Generators\Barcode1d;
-use Illuminate\Support\Facades\Auth;
 
 class PackageController extends Controller
 {
-    public function index() {
-        if(Auth::user()->level() < 3){
+    public function index()
+    {
+        if (Auth::user()->level() < 3) {
             abort(401);
         }
         return view('packages', [
@@ -28,11 +25,13 @@ class PackageController extends Controller
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('webshop.signupPackage');
     }
 
-    public function store() {
+    public function store()
+    {
         request()->validate([
             'recipient-name' => 'required|max:255|min:3',
             'recipient-street' => 'required|max:255',
@@ -42,7 +41,7 @@ class PackageController extends Controller
             'recipient-city' => 'required|max:255',
             'recipient-country' => 'required|max:255',
             'recipient-phone_number' => 'required|max:16',
-            'recipient-email'=> 'required|email|max:255',
+            'recipient-email' => 'required|email|max:255',
             'notes' => 'max:65535'
         ]);
 
@@ -51,7 +50,8 @@ class PackageController extends Controller
         ]);
     }
 
-    public function storeCsv() {
+    public function storeCsv()
+    {
         $path = request()->file('csv_file')->getRealPath();
         $data = array_map('str_getcsv', file($path));
         //remove the header from the file
@@ -62,8 +62,9 @@ class PackageController extends Controller
         ]);
     }
 
-    public function generatePdf() {
-        if(Auth::user()->level() < 3){
+    public function generatePdf()
+    {
+        if (Auth::user()->level() < 3) {
             abort(401);
         }
         $package = Package::With('sender', 'recipient')->find(request('id'));
@@ -80,8 +81,9 @@ class PackageController extends Controller
         return $pdf->stream('label.pdf');
     }
 
-    public function generatePdfs(Request $request) {
-        if(Auth::user()->level() < 3){
+    public function generatePdfs(Request $request)
+    {
+        if (Auth::user()->level() < 3) {
             abort(401);
         }
         $packageIds = $request->query();
@@ -100,13 +102,15 @@ class PackageController extends Controller
         return $pdf->stream('labels.pdf');
     }
 
-    public function requestPickupView() {
+    public function requestPickupView()
+    {
         return view('pickup', [
             'packages' => Package::with(['sender', 'recipient'])->where('status_id', '=', '1')->where('transporter', '=', null)->get()
         ]);
     }
 
-    public function requestPickup() {
+    public function requestPickup()
+    {
         date_default_timezone_set("Europe/Amsterdam");
         if (date('H') > 15) {
             request()->validate([
@@ -128,13 +132,15 @@ class PackageController extends Controller
         return redirect('/')->with('succes', 'Pickup moment successfully registered');
     }
 
-    public function editPackageView() {
+    public function editPackageView()
+    {
         return view('editPackage', [
             'package' => Package::With('recipient.address', 'recipient')->find(request('id'))
         ]);
     }
 
-    public function editPackage() {
+    public function editPackage()
+    {
         request()->validate([
             'recipient-name' => 'required|max:255|min:3',
             'recipient-street' => 'required|max:255',
@@ -144,7 +150,7 @@ class PackageController extends Controller
             'recipient-city' => 'required|max:255',
             'recipient-country' => 'required|max:255',
             'recipient-phone_number' => 'required|max:16',
-            'recipient-email'=> 'required|email|max:255',
+            'recipient-email' => 'required|email|max:255',
             'notes' => 'max:65535'
         ]);
 

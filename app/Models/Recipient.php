@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Recipient
@@ -15,52 +19,58 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email_address
  * @property string $phone_number
  * @property int $address_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Address|null $address
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Package[] $packages
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Address|null $address
+ * @property-read Collection|Package[] $packages
  * @property-read int|null $packages_count
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient query()
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereAddressId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereEmailAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereMiddleName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient wherePhoneNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient whereUpdatedAt($value)
- * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|Recipient filter(array $filters)
+ * @method static Builder|Recipient newModelQuery()
+ * @method static Builder|Recipient newQuery()
+ * @method static Builder|Recipient query()
+ * @method static Builder|Recipient whereAddressId($value)
+ * @method static Builder|Recipient whereCreatedAt($value)
+ * @method static Builder|Recipient whereEmailAddress($value)
+ * @method static Builder|Recipient whereFirstName($value)
+ * @method static Builder|Recipient whereId($value)
+ * @method static Builder|Recipient whereLastName($value)
+ * @method static Builder|Recipient whereMiddleName($value)
+ * @method static Builder|Recipient wherePhoneNumber($value)
+ * @method static Builder|Recipient whereUpdatedAt($value)
+ * @mixin Eloquent
+ * @method static Builder|Recipient filter(array $filters)
  */
 class Recipient extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
 
-    public function address(){
+    public function address()
+    {
         return $this->belongsTo(Address::class);
     }
-    public function packages(){
+
+    public function packages()
+    {
         return $this->hasMany(Package::class);
     }
+
     public function fullName(): string
     {
         $fullName = $this->first_name . ' ';
 
-        if($this->middle_name != null) {
+        if ($this->middle_name != null) {
             $fullName .= $this->middle_name . ' ';
         }
         return $fullName . $this->last_name;
     }
 
-    public function scopeFilter($query, array $filters) {
+    public function scopeFilter($query, array $filters)
+    {
         if ($filters['name'] ?? false) {
             $query
-                ->where('name' ,'like', '%' . request('name') . '%');
+                ->where('name', 'like', '%' . request('name') . '%');
         }
 
         if ($filters['country'] ?? false) {

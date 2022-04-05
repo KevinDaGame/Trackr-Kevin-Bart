@@ -16,8 +16,7 @@ class TrackrController extends Controller
             $package = Package::with('recipient.address')->find(session()->get('trace-code'));
             if ($package != null && $package->recipient->address->postal_code == strtoupper(str_replace(' ', '', session()->get('postal-code')))) {
                 return view('trackr.index', ['package' => $package]);
-            }
-            else{
+            } else {
                 session()->remove('postal-code');
                 session()->remove('trace-code');
             }
@@ -48,25 +47,30 @@ class TrackrController extends Controller
         return view('trackr.package');
     }
 
-    public function packages(){
+    public function packages()
+    {
         $user = Auth::user();
         return view('trackr.packages', ['packages' => $user->packages()->get()]);
     }
 
-    public function savePackage(){
-         PackageUser::create([
+    public function savePackage()
+    {
+        PackageUser::create([
             'user_id' => Auth::user()->id,
             'package_id' => request()->get('package_id')
         ]);
         return redirect('')->with('succes', 'package saved!');
     }
 
-    public function review($id){
+    public function review($id)
+    {
         return view('trackr.leaveReview', [
             'package' => Package::find($id)
         ]);
     }
-    public function saveReview(){
+
+    public function saveReview()
+    {
         request()->validate([
             'trace-code' => 'required|exists:packages,id',
             'review' => 'required|min:10'
