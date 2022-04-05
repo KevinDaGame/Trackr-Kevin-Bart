@@ -8,6 +8,7 @@ use App\Models\Sender;
 use App\Models\Status;
 use App\Http\Requests\ReportPackageRequest;
 use App\Models\Address;
+use App\Services\PackageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -46,7 +47,7 @@ class PackageController extends Controller
         ]);
 
         return view('webshop.packageSignupSuccess', [
-            'packageIds' => [$recipient->email_address => $package->id]
+            'packageIds' => [request()->get('recipient-email') => PackageService::CreatePackage(request()->all())]
         ]);
     }
 
@@ -57,7 +58,7 @@ class PackageController extends Controller
         unset($data[0]);
 
         return view('webshop.packageSignupSuccess', [
-            'packageIds' => $packages
+            'packageIds' => PackageService::CreatePackages($data)
         ]);
     }
 
