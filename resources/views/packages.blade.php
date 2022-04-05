@@ -69,5 +69,5 @@
             </tbody>
         </form>
     </table>
-    <button type="submit" class="btn btn-primary btn-sm" form="selected-packages">Download geselecteerde orders als pdf</button>
+    <button type="submit" class="btn btn-primary btn-sm" form="selected-packages">{{__('Download selected orders as pdf')}}</button>
 @endsection
