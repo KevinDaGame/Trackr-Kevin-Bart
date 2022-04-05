@@ -30,12 +30,7 @@ class PackageApiController extends Controller
         $package = Package::find($request->id);
         $webshop = Sender::find(Auth::user()->sender_id);
         if ($package->sender_id == $webshop->id) {
-            if($request->has('status_id')) {
-                $package->status_id = $request->status_id;
-            }
-            else if($package->status_id <= 6) {
-                $package->status_id++;
-            }
+            $package->status_id = $this->getNewPackageStatus($request->status_id, $package->status);
             $package->save();
         }
         return json_encode([
@@ -84,4 +79,13 @@ class PackageApiController extends Controller
         ]);
     }
 
+    public function getNewPackageStatus(int $id, int $packageStatusId): int
+    {
+        if ($id > 0) {
+            return $id;
+        } else if ($packageStatusId <= 6) {
+            return $packageStatusId + 1;
+        }
+        return $packageStatusId;
+    }
 }
