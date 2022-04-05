@@ -64,7 +64,7 @@
                     <td>
                         <a href="/generate-pdf?id={{$package->id}}">{{__('Download as pdf')}}</a>
                     </td>
-                    @if(Auth::user()->level() >= 4)
+                    @level(4)
                     <td>
                         <a href="/editpackage?id={{$package->id}}">{{__('Edit')}}</a>
                     </td>
