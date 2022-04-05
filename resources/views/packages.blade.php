@@ -30,8 +30,8 @@
                 <select name="status" id="status" class="form-control">
                     <option></option>
                     @foreach($statuses as $status)
-                        <option value="{{ $status }}" {{ ( $status == request('status')) ? 'selected' : '' }}>
-                            {{ $status }}
+                        <option value="{{ $status->id }}" {{ ( $status->id == request('status')) ? 'selected' : '' }}>
+                            {{ $status->status }}
                         </option>
                     @endforeach
                 </select>

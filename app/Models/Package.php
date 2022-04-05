@@ -80,7 +80,7 @@ class Package extends Model
 
         if ($filters['status'] ?? false) {
             $query
-                ->Where('status', request('status'));
+                ->Where('status_id', request('status'));
         }
     }
 }
