@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use App\Models\PackageUser;
+use App\Models\Review;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,5 +59,25 @@ class TrackrController extends Controller
             'package_id' => request()->get('package_id')
         ]);
         return redirect('')->with('succes', 'package saved!');
+    }
+
+    public function review($id){
+        return view('trackr.leaveReview', [
+            'package' => Package::find($id)
+        ]);
+    }
+    public function saveReview(){
+        request()->validate([
+            'trace-code' => 'required|exists:packages,id',
+            'review' => 'required|min:10'
+        ]);
+        Review::create(
+            [
+                'package_id' => request()->get('trace-code'),
+                'review' => request()->get('review'),
+                'user_id' => Auth::user()->id
+            ]
+        );
+        return redirect('/trackr/packages')->with('succes', 'review saved!');
     }
 }

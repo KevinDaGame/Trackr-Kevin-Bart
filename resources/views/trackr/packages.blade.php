@@ -19,6 +19,9 @@
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
                     <td>{{$package->status->status}}</td>
+                    @if($package->status->status == 'Delivered')
+                        <td><a href="/trackr/review/{{$package->id}}" class="btn btn-primary">{{__('Review')}}</a></td>
+                        @endif
                 </tr>
             @endforeach
             </tbody>

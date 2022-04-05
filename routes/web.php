@@ -70,6 +70,8 @@ Route::get('/findpackage', [TrackrController::class, 'index']);
 Route::post('/findPackage', [TrackrController::class, 'findPackage']);
 Route::get('/trackr/packages', [TrackrController::class, 'packages'])->middleware('role:customer');
 Route::post('/trackr/savepackage', [TrackrController::class, 'savePackage'])->middleware('role:customer');
+Route::get('/trackr/review/{id}', [TrackrController::class, 'review'])->middleware('role:customer');
+Route::post('/trackr/review/send', [TrackrController::class, 'saveReview'])->middleware('role:customer');
 
 Route::get('addemployee', [RegisterController::class, 'addEmployeeView'])->middleware('level:4');
 Route::post('addemployee', [RegisterController::class, 'addEmployee'])->middleware('level:4');
