@@ -44,7 +44,7 @@ class Package extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $guarded = [];
-    protected $fillable = ['sender_id', 'address_id', 'recipient_id', 'notes', 'status'];
+    protected $fillable = ['sender_id', 'address_id', 'recipient_id', 'status_id', 'notes'];
     public function sender(){
         return $this->belongsTo(Sender::class);
     }

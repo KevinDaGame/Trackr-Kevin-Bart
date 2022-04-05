@@ -80,13 +80,13 @@ class DatabaseSeeder extends Seeder
         $package_1 = Package::create([
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_1->id,
-            'status' => 'In transit',
+            'status_id' => '5',
             'sent_date' => '2022-03-02 11:28:22'
         ]);
         $package_2 = Package::create([
             'sender_id' => $sender_1->id,
             'recipient_id'=>$recipient_2->id,
-            'status' => 'Reported',
+            'status_id' => '1',
             'sent_date' => '2022-03-02 11:28:22'
         ]);
     }

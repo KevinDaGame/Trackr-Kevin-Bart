@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('package', PackageApiController::class)->middleware('auth:sanctum');
+Route::post('package/create', [PackageApiController::class, 'store'])->middleware('auth:sanctum');
+Route::post('package/update', [PackageApiController::class, 'update'])->middleware('auth:sanctum');
