@@ -9,25 +9,25 @@
         <div class="form-group row">
 
             <label class="form-label" for="trace-code">{{__('Track and trace code')}}</label>
-            <input type="text" class="form-control" name="trace-code" id="trace-code" value="{{old('trace-code')}}">
+            <input type="text" class="form-control" name="trace-code" id="trace-code" value="{{session()->has('trace-code') ? session()->get('trace-code') : old('trace-code')}}">
             @error('trace-code')
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
         <div class="form-group row">
             <label for="postal-code">{{__('Postal code')}}</label>
-            <input type="text" name="postal-code" id="postal-code" value="{{old('postal-code')}}">
+            <input type="text" name="postal-code" id="postal-code" value="{{session()->has('postal-code') ? session()->get('postal-code') : old('postal-code')}}">
             @error('postal-code')
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
     </form>
-    <button type="submit" form="findPackage" class="btn btn-lg btn-primary">{{__('Search')}}</button>
+    <button type="submit" form="findPackage" class="btn btn-lg btn-primary m-2">{{__('Search')}}</button>
 
     @if(isset($package))
-        <div class="row">
+        <div class="row text-center">
             <h1>{{__('Current status')}}</h1>
-            <h3>{{__($package->status)}}</h3>
+            <h3>{{__($package->status->status)}}</h3>
             @if($package->delivered_date != null)
                 <p>{{__('Delivered at: ')}}<span>{{$package->delivered_date}}</span></p>
             @elseif($package->sent_date != null)
@@ -50,5 +50,12 @@
                 <p>{{$package->sender->address->country}}</p>
             </div>
         </div>
+        @if(Auth::user() != null && Auth::user()->level() == 1)
+            <form action="trackr/savepackage" method="POST">
+                @csrf
+                <input type="hidden" name="package_id" id="package_id" value="{{$package->id}}">
+            <button class="btn btn-primary btn-lg m-2 align-self-center" type="submit">{{__('Save this package')}}</button>
+            </form>
+        @endif
     @endif
 @endsection

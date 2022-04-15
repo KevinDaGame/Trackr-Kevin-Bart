@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
 class ReportPackageRequest extends FormRequest
 {
@@ -15,7 +15,6 @@ class ReportPackageRequest extends FormRequest
      */
     public function authorize()
     {
-        //TODO Make this variable!!!!!!
         return true;
     }
 
@@ -39,12 +38,13 @@ class ReportPackageRequest extends FormRequest
             'recipient.email' => 'required|email|max:255',
         ];
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors()
         ]));
     }
 }

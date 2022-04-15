@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class TokensController extends Controller
 {
-    public function index() {
-        if(!Auth::user()->hasRole('webshop')){
+    public function index()
+    {
+        if (!Auth::user()->hasRole('webshop')) {
             abort(401);
         }
 
@@ -18,25 +19,27 @@ class TokensController extends Controller
         ]);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $user = Auth::user();
-        if(!Auth::user()->hasRole('webshop')){
+        if (!Auth::user()->hasRole('webshop')) {
             abort(401);
         }
 
         $tokens = $request->dl;
-        foreach ($tokens as $token){
+        foreach ($tokens as $token) {
             $user->tokens()->where('id', $token)->delete();
         }
 
         return redirect('/webshop/tokens')->with('success', 'The selected tokens have been deleted!');
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         request()->validate([
             'tokenName' => 'required'
-            ]);
-        if(!Auth::user()->hasRole('webshop')){
+        ]);
+        if (!Auth::user()->hasRole('webshop')) {
             abort(401);
         }
         $token = Auth::user()->createToken($request->tokenName, ['package:create', 'package:update'])->plainTextToken;

@@ -30,8 +30,8 @@
                 <select name="status" id="status" class="form-control">
                     <option></option>
                     @foreach($statuses as $status)
-                        <option value="{{ $status }}" {{ ( $status == request('status')) ? 'selected' : '' }}>
-                            {{ $status }}
+                        <option value="{{ $status->id }}" {{ ( $status->id == request('status')) ? 'selected' : '' }}>
+                            {{ $status->status }}
                         </option>
                     @endforeach
                 </select>
@@ -60,14 +60,19 @@
                     <th scope="row">{{$package->id}}</th>
                     <td>{{$package->sender->name}}</td>
                     <td>{{$package->recipient ?? false ? $package->recipient->name : ''}}</td>
-                    <td>{{$package->status}}</td>
+                    <td>{{__($package->status->status)}}</td>
                     <td>
-                        <a href="/generate-pdf?id={{$package->id}}">Download als pdf</a>
+                        <a href="/generate-pdf?id={{$package->id}}">{{__('Download as pdf')}}</a>
                     </td>
+                    @level(4)
+                    <td>
+                        <a href="/editpackage?id={{$package->id}}">{{__('Edit')}}</a>
+                    </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
         </form>
     </table>
-    <button type="submit" class="btn btn-primary btn-sm" form="selected-packages">Download geselecteerde orders als pdf</button>
+    <button type="submit" class="btn btn-primary btn-sm" form="selected-packages">{{__('Download selected orders as pdf')}}</button>
 @endsection
